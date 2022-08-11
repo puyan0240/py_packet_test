@@ -1,7 +1,6 @@
-from sre_parse import State
 import tkinter
 from tkinter import ttk
-from turtle import st
+
 
 
 start_flag = False
@@ -42,34 +41,66 @@ root.geometry("700x700")
 ###########################################################
 #Frame (TOP)
 ###########################################################
-frame_top = tkinter.Frame(root,bg='WHITE', relief=tkinter.SOLID, bd=1)
-frame_top.pack(fill=tkinter.X)
+frame_top_base = tkinter.Frame(root)
+frame_top_base.pack(fill=tkinter.X, pady=(0,20))
 
-#部品配置--------------------------------------------------
-label_top_mode  = tkinter.Label(frame_top, padx=20, text="動作モード: ", font=('System', 12))
-label_top_mode.pack(side=tkinter.LEFT, anchor=tkinter.W, fill=tkinter.X)
+#左側1行目
+frame_top_left = tkinter.Frame(frame_top_base)
+frame_top_left.pack(side=tkinter.LEFT, padx=10)
+
+frame_top1 = tkinter.Frame(frame_top_left)
+frame_top1.pack()
+
+label_top_mode = tkinter.Label(frame_top1, text="動作モード: ", font=('System', 12))
+label_top_mode.grid(row=0, column=0, sticky=tkinter.W)
 
 radio_top_text = ['auto', 'manual']
 radio_top_grp  = tkinter.IntVar()
-radio_top_auto = tkinter.Radiobutton(frame_top, value=0, variable=radio_top_grp, text=radio_top_text[0], font=('System', 12), command=radio_top_click)
-radio_top_auto.pack(side=tkinter.LEFT, anchor=tkinter.W, padx=5)
-radio_top_manual = tkinter.Radiobutton(frame_top, value=1, variable=radio_top_grp, text=radio_top_text[1], font=('System', 12), command=radio_top_click)
-radio_top_manual.pack(side=tkinter.LEFT, anchor=tkinter.W, padx=5)
+radio_top_auto = tkinter.Radiobutton(frame_top1, value=0, variable=radio_top_grp, text=radio_top_text[0], font=('System', 12), command=radio_top_click)
+radio_top_auto.grid(row=0, column=1, sticky=tkinter.W)
+radio_top_manual = tkinter.Radiobutton(frame_top1, value=1, variable=radio_top_grp, text=radio_top_text[1], font=('System', 12), command=radio_top_click)
+radio_top_manual.grid(row=0, column=2, sticky=tkinter.W)
+
+
+#左側2行目
+frame_top2 = tkinter.Frame(frame_top_left)
+frame_top2.pack()
+
+#送信先IPアドレス
+label_top_dstip = tkinter.Label(frame_top2, text="送信先IPアドレス (IPv4):")
+label_top_dstip.grid(row=0, column=0, sticky=tkinter.W)
+text_top_dstip = tkinter.Entry(frame_top2, width=16)
+text_top_dstip.grid(row=0, column=1, sticky=tkinter.W)
+
+#送信先ポート番号
+label_top_dport = tkinter.Label(frame_top2, text="送信先ポート番号 (0-65535):")
+label_top_dport.grid(row=0, column=2, sticky=tkinter.W, padx=(5,0))
+text_top_dport = tkinter.Entry(frame_top2, width=6)
+text_top_dport.grid(row=0, column=3, sticky=tkinter.W)
+
+
+#右側
+frame_top_right = tkinter.Frame(frame_top_base)
+frame_top_right.pack(side=tkinter.RIGHT)
+
 #ボタン
-btn_top = tkinter.Button(frame_top, text="開始", font=('System', 12), padx=10, bg='GREEN', command=btn_top_click)
-btn_top.pack(side=tkinter.RIGHT, padx=10)
+btn_top = tkinter.Button(frame_top_right, text="開始", font=('System', 12), padx=10, bg='GREEN', command=btn_top_click)
+btn_top.pack(padx=(10,10))
 
-
+#境界線
+border = ttk.Separator(root, orient="horizontal")
+border.pack(fill=tkinter.X)
 
 ###########################################################
 #Frame (IP)
 ###########################################################
+#IP 1行目--------------------
 frame_ip1 = tkinter.Frame(root)
-frame_ip1.pack(fill=tkinter.X)
+frame_ip1.pack(fill=tkinter.X, padx=10)
 
 #タイトル
 title_text = "==================== IP HEADER ===================="
-label_ip_title  = tkinter.Label(frame_ip1, padx=20, text=title_text, font=('System','12','bold'))
+label_ip_title  = tkinter.Label(frame_ip1, text=title_text, font=('System','12','bold'))
 label_ip_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #Version
@@ -98,8 +129,9 @@ text_ip_tl = tkinter.Entry(frame_ip1, width=6)
 text_ip_tl.grid(row=1, column=7, sticky=tkinter.W)
 
 
+#IP 2行目--------------------
 frame_ip2 = tkinter.Frame(root)
-frame_ip2.pack(fill=tkinter.X)
+frame_ip2.pack(fill=tkinter.X, padx=10)
 
 #識別番号
 label_ip_id = tkinter.Label(frame_ip2, text="識別番号 (空白->自動 | 0-65535):")
@@ -120,8 +152,9 @@ text_ip_foffset = tkinter.Entry(frame_ip2, width=6)
 text_ip_foffset.grid(row=0, column=5, sticky=tkinter.W)
 
 
+#IP 3行目--------------------
 frame_ip3 = tkinter.Frame(root)
-frame_ip3.pack(fill=tkinter.X)
+frame_ip3.pack(fill=tkinter.X, padx=10)
 
 #TTL
 label_ip_ttl = tkinter.Label(frame_ip3, text="TTL (空白->自動 | 0-255):")
@@ -142,8 +175,9 @@ text_ip_chksum = tkinter.Entry(frame_ip3, width=6)
 text_ip_chksum.grid(row=0, column=5, sticky=tkinter.W)
 
 
+#IP 4行目--------------------
 frame_ip4 = tkinter.Frame(root)
-frame_ip4.pack(fill=tkinter.X)
+frame_ip4.pack(fill=tkinter.X, padx=10)
 
 #送信元IPアドレス
 label_ip_srcip = tkinter.Label(frame_ip4, text="送信元IPアドレス (空白->自動 | IPv4):")
@@ -158,8 +192,9 @@ text_ip_dstip = tkinter.Entry(frame_ip4, width=16)
 text_ip_dstip.grid(row=0, column=3, sticky=tkinter.W)
 
 
+#IP 5行目--------------------
 frame_ip5 = tkinter.Frame(root)
-frame_ip5.pack(fill=tkinter.X)
+frame_ip5.pack(fill=tkinter.X, padx=10)
 
 #オプション
 label_ip_opt = tkinter.Label(frame_ip5, text="オプション:")
@@ -177,12 +212,13 @@ text_ip_pad.grid(row=0, column=3, sticky=tkinter.W)
 ###########################################################
 #Frame (UDP)
 ###########################################################
+#UDP: 1行目--------------------
 frame_udp1 = tkinter.Frame(root)
-frame_udp1.pack(fill=tkinter.X)
+frame_udp1.pack(fill=tkinter.X, padx=10)
 
 #タイトル
 title_text = "\n==================== UDP HEADER ===================="
-label_udp_title  = tkinter.Label(frame_udp1, padx=20, text=title_text, font=('System', '12', 'bold'))
+label_udp_title  = tkinter.Label(frame_udp1, text=title_text, font=('System', '12', 'bold'))
 label_udp_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #送信元ポート番号
@@ -192,14 +228,14 @@ text_udp_sport = tkinter.Entry(frame_udp1, width=6)
 text_udp_sport.grid(row=1, column=1, sticky=tkinter.W)
 
 #送信先ポート番号
-label_udp_dport = tkinter.Label(frame_udp1, text="送信先ポート番号 (空白->自動 | 0-65535):")
+label_udp_dport = tkinter.Label(frame_udp1, text="送信先ポート番号 (0-65535):")
 label_udp_dport.grid(row=1, column=2, sticky=tkinter.W, padx=(5,0))
 text_udp_dport = tkinter.Entry(frame_udp1, width=6)
 text_udp_dport.grid(row=1, column=3, sticky=tkinter.W)
 
-
+#UDP: 2行目--------------------
 frame_udp2 = tkinter.Frame(root)
-frame_udp2.pack(fill=tkinter.X)
+frame_udp2.pack(fill=tkinter.X, padx=10)
 
 #データ長
 label_udp_dtl = tkinter.Label(frame_udp2, text="データ長 (空白->自動 | 0-65535):")
@@ -218,11 +254,11 @@ text_udp_chksum.grid(row=0, column=3, sticky=tkinter.W)
 #Frame (DATA)
 ###########################################################
 frame_data = tkinter.Frame(root)
-frame_data.pack(fill=tkinter.X)
+frame_data.pack(fill=tkinter.X, padx=10)
 
 #タイトル
 title_text = "\n==================== User DATA ===================="
-label_data_title  = tkinter.Label(frame_data, padx=20, text=title_text, font=('System', '12', 'bold'))
+label_data_title  = tkinter.Label(frame_data, text=title_text, font=('System', '12', 'bold'))
 label_data_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #データ
