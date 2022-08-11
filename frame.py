@@ -69,7 +69,7 @@ frame_ip1.pack(fill=tkinter.X)
 
 #タイトル
 title_text = "==================== IP HEADER ===================="
-label_ip_title  = tkinter.Label(frame_ip1, padx=20, text=title_text, font=('System', 12))
+label_ip_title  = tkinter.Label(frame_ip1, padx=20, text=title_text, font=('System','12','bold'))
 label_ip_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #Version
@@ -182,7 +182,7 @@ frame_udp1.pack(fill=tkinter.X)
 
 #タイトル
 title_text = "\n==================== UDP HEADER ===================="
-label_udp_title  = tkinter.Label(frame_udp1, padx=20, text=title_text, font=('System', 12))
+label_udp_title  = tkinter.Label(frame_udp1, padx=20, text=title_text, font=('System', '12', 'bold'))
 label_udp_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #送信元ポート番号
@@ -222,7 +222,7 @@ frame_data.pack(fill=tkinter.X)
 
 #タイトル
 title_text = "\n==================== User DATA ===================="
-label_data_title  = tkinter.Label(frame_data, padx=20, text=title_text, font=('System', 12))
+label_data_title  = tkinter.Label(frame_data, padx=20, text=title_text, font=('System', '12', 'bold'))
 label_data_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #データ
