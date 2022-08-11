@@ -37,7 +37,7 @@ root.geometry("800x400")
 
 
 ###########################################################
-#TOP Frame
+#Frame (TOP)
 ###########################################################
 frame_top = tkinter.Frame(root,bg='WHITE', relief=tkinter.SOLID, bd=1)
 frame_top.pack(fill=tkinter.X)
@@ -59,58 +59,127 @@ btn_top.pack(side=tkinter.RIGHT, padx=10)
 
 
 ###########################################################
-#MAIN IP Frame
+#Frame (IP)
 ###########################################################
-frame_ip = tkinter.Frame(root, bg='dark cyan', relief=tkinter.SOLID, bd=1)
-frame_ip.pack(fill=tkinter.X)
+frame_ip1 = tkinter.Frame(root, bg='dark cyan')
+frame_ip1.pack(fill=tkinter.X)
 
-#部品配置--------------------------------------------------
 #タイトル
-label_ip_title  = tkinter.Label(frame_ip, padx=20, text="IP: ", font=('System', 12))
+label_ip_title  = tkinter.Label(frame_ip1, padx=20, text="IP: ", font=('System', 12))
 label_ip_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #Version
-label_ip_ver = tkinter.Label(frame_ip, text="version (0-15):")
+label_ip_ver = tkinter.Label(frame_ip1, text="version (0-15):")
 label_ip_ver.grid(row=1, column=0, sticky=tkinter.W)
-text_ip_ver = tkinter.Entry(frame_ip, width=4)
+text_ip_ver = tkinter.Entry(frame_ip1, width=4)
 text_ip_ver.insert(tkinter.END, "4")
 text_ip_ver.grid(row=1, column=1, sticky=tkinter.W)
 
 #ヘッダ長
-label_ip_ihl = tkinter.Label(frame_ip, text="ヘッダ長 (空白->自動 | 0-15):")
+label_ip_ihl = tkinter.Label(frame_ip1, text="ヘッダ長 (空白->自動 | 0-15):")
 label_ip_ihl.grid(row=1, column=2, sticky=tkinter.W)
-text_ip_ihl = tkinter.Entry(frame_ip, width=4)
+text_ip_ihl = tkinter.Entry(frame_ip1, width=4)
 text_ip_ihl.grid(row=1, column=3, sticky=tkinter.W)
 
 #サービスタイプ
-label_ip_tos = tkinter.Label(frame_ip, text="ToS (0-127):")
+label_ip_tos = tkinter.Label(frame_ip1, text="ToS (空白->自動 | 0-127):")
 label_ip_tos.grid(row=1, column=4, sticky=tkinter.W)
-text_ip_tos = tkinter.Entry(frame_ip, width=4)
-text_ip_tos.insert(tkinter.END, "0")
+text_ip_tos = tkinter.Entry(frame_ip1, width=4)
 text_ip_tos.grid(row=1, column=5, sticky=tkinter.W)
 
 #全長
-label_ip_tl = tkinter.Label(frame_ip, text="全長 (空白->自動 | 0-65535):")
+label_ip_tl = tkinter.Label(frame_ip1, text="全長 (空白->自動 | 0-65535):")
 label_ip_tl.grid(row=1, column=6, sticky=tkinter.W)
-text_ip_tl = tkinter.Entry(frame_ip, width=6)
+text_ip_tl = tkinter.Entry(frame_ip1, width=6)
 text_ip_tl.grid(row=1, column=7, sticky=tkinter.W)
 
+
+frame_ip2 = tkinter.Frame(root, bg='dark cyan')
+frame_ip2.pack(fill=tkinter.X)
+
 #識別番号
-label_ip_id = tkinter.Label(frame_ip, text="識別番号 (空白->自動 | 0-65535):")
-label_ip_id.grid(row=2, column=0)
+label_ip_id = tkinter.Label(frame_ip2, text="識別番号 (空白->自動 | 0-65535):")
+label_ip_id.grid(row=0, column=0)
+text_ip_id = tkinter.Entry(frame_ip2, width=6)
+text_ip_id.grid(row=0, column=1, sticky=tkinter.W)
 
+#フラグ
+label_ip_flags = tkinter.Label(frame_ip2, text="フラグ (空白->自動 | 0-7):")
+label_ip_flags.grid(row=0, column=2)
+text_ip_flags = tkinter.Entry(frame_ip2, width=6)
+text_ip_flags.grid(row=0, column=3, sticky=tkinter.W)
+
+#フラグメントオフセット
+label_ip_foffset = tkinter.Label(frame_ip2, text="フラグメントオフセット (空白->自動 | 0-8191):")
+label_ip_foffset.grid(row=0, column=4)
+text_ip_foffset = tkinter.Entry(frame_ip2, width=6)
+text_ip_foffset.grid(row=0, column=5, sticky=tkinter.W)
+
+
+frame_ip3 = tkinter.Frame(root, bg='dark cyan')
+frame_ip3.pack(fill=tkinter.X)
+
+#TTL
+label_ip_ttl = tkinter.Label(frame_ip3, text="TTL (空白->自動 | 0-255):")
+label_ip_ttl.grid(row=0, column=0, sticky=tkinter.W)
+text_ip_ttl = tkinter.Entry(frame_ip3, width=6)
+text_ip_ttl.grid(row=0, column=1, sticky=tkinter.W)
+
+#プロトコル
+label_ip_protocol = tkinter.Label(frame_ip3, text="プロトコル (空白->自動 | 0-15):")
+label_ip_protocol.grid(row=0, column=2, sticky=tkinter.W)
+text_ip_protocol = tkinter.Entry(frame_ip3, width=6)
+text_ip_protocol.grid(row=0, column=3, sticky=tkinter.W)
+
+#ヘッダチェックサム
+label_ip_chksum = tkinter.Label(frame_ip3, text="ヘッダチェックサム (空白->自動 | 0-65535):")
+label_ip_chksum.grid(row=0, column=4)
+text_ip_chksum = tkinter.Entry(frame_ip3, width=6)
+text_ip_chksum.grid(row=0, column=5, sticky=tkinter.W)
+
+
+frame_ip4 = tkinter.Frame(root, bg='dark cyan')
+frame_ip4.pack(fill=tkinter.X)
+
+#送信元IPアドレス
+label_ip_srcip = tkinter.Label(frame_ip4, text="送信元IPアドレス (空白->自動 | IPv4):")
+label_ip_srcip.grid(row=0, column=0)
+text_ip_srcip = tkinter.Entry(frame_ip4, width=16)
+text_ip_srcip.grid(row=0, column=1, sticky=tkinter.W)
+
+#送信先IPアドレス
+label_ip_dstip = tkinter.Label(frame_ip4, text="送信先IPアドレス (空白->自動 | IPv4):")
+label_ip_dstip.grid(row=0, column=2)
+text_ip_dstip = tkinter.Entry(frame_ip4, width=16)
+text_ip_dstip.grid(row=0, column=3, sticky=tkinter.W)
+
+
+frame_ip5 = tkinter.Frame(root, bg='dark cyan')
+frame_ip5.pack(fill=tkinter.X)
+
+#オプション
+label_ip_opt = tkinter.Label(frame_ip5, text="オプション:")
+label_ip_opt.grid(row=0, column=0)
+text_ip_opt = tkinter.Entry(frame_ip5, width=16)
+text_ip_opt.grid(row=0, column=1, sticky=tkinter.W)
+
+#パディング
+label_ip_pad = tkinter.Label(frame_ip5, text="パディング:(空白->自動 | 0-)")
+label_ip_pad.grid(row=0, column=2)
+text_ip_pad = tkinter.Entry(frame_ip5, width=16)
+text_ip_pad.grid(row=0, column=3, sticky=tkinter.W)
 
 
 ###########################################################
-#MAIN UDP Frame
+#Frame (UDP)
 ###########################################################
-frame_udp = tkinter.Frame(root, bg='dark cyan', relief=tkinter.SOLID, bd=1)
+frame_udp = tkinter.Frame(root, bg='dark cyan')
 frame_udp.pack(fill=tkinter.X)
 
 
 
 ###########################################################
-#STATUS Frame
+#Frame (STATUS)
 ###########################################################
 frame_status = tkinter.Frame(root, relief=tkinter.SOLID, bd=1)
 frame_status.pack(fill=tkinter.X)
