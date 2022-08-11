@@ -38,7 +38,7 @@ root.geometry("800x400")
 ###########################################################
 #TOP Frame
 ###########################################################
-frame_top = tkinter.Frame(root,bg='WHITE', relief=tkinter.SOLID, bd=1,width=500)
+frame_top = tkinter.Frame(root,bg='WHITE', relief=tkinter.SOLID, bd=1)
 frame_top.pack(fill=tkinter.X)
 
 #部品配置
@@ -59,16 +59,33 @@ btn_top.pack(side=tkinter.RIGHT, padx=10)
 
 
 ###########################################################
-#MAIN Frame
+#MAIN IP Frame
 ###########################################################
-frame_main = tkinter.Frame(root, width=100, bg='dark cyan')
-frame_main.pack(fill=tkinter.X)
+frame_ip = tkinter.Frame(root, bg='dark cyan', relief=tkinter.SOLID, bd=1)
+frame_ip.pack(fill=tkinter.X)
+
+#部品配置
+label_ip  = tkinter.Label(frame_ip, padx=20, text="IP: ", font=('System', 12))
+label_ip.pack(fill=tkinter.X)
+
+#label_ver =tkinter.Label(frame_ip, text="version")
+#label_ver.pack(side=tkinter.LEFT)
+
+
+
+
+###########################################################
+#MAIN UDP Frame
+###########################################################
+frame_udp = tkinter.Frame(root, bg='dark cyan', relief=tkinter.SOLID, bd=1)
+frame_udp.pack(fill=tkinter.X)
+
 
 
 ###########################################################
 #STATUS Frame
 ###########################################################
-frame_status = tkinter.Frame(root, bg='RED')
+frame_status = tkinter.Frame(root, relief=tkinter.SOLID, bd=1)
 frame_status.pack(fill=tkinter.X)
 
 root.mainloop()
