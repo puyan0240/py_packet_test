@@ -8,7 +8,7 @@ start_flag = False
 
 #ラジオボタン押下
 def radio_top_click():
-    print("ラジオボタン押下:"+str(radio_top_text[radio_top_grp.get()]))
+    #print("ラジオボタン押下:"+str(radio_top_text[radio_top_grp.get()]))
     manual_input_ctrl() #手動Frame入力規制/解除
 
 
@@ -48,9 +48,11 @@ def btn_top_click():
 
         start_flag = True
         btn_top.config(text='停止', bg='RED')
-        #入力規制
-        radio_top_auto.config(state=tkinter.DISABLED)   #TOPラジオボタン
-        radio_top_manual.config(state=tkinter.DISABLED) #TOPラジオボタン
+        #入力規制(TOP)
+        radio_top_auto.config(state=tkinter.DISABLED)
+        radio_top_manual.config(state=tkinter.DISABLED)
+        text_top_dstip.config(state=tkinter.DISABLED)
+        text_top_dport.config(state=tkinter.DISABLED)
     else:
         #手動Frameの送信先IPアドレスとポート番号をクリア
         text_ip_dstip.config(state=tkinter.NORMAL)
@@ -62,22 +64,18 @@ def btn_top_click():
 
         start_flag = False
         btn_top.config(text='開始', bg='GREEN')
-        #入力規制解除
-        radio_top_auto.config(state=tkinter.NORMAL)     #TOPラジオボタン
-        radio_top_manual.config(state=tkinter.NORMAL)   #TOPラジオボタン
+        #入力規制解除(TOP)
+        radio_top_auto.config(state=tkinter.NORMAL)
+        radio_top_manual.config(state=tkinter.NORMAL)
+        text_top_dstip.config(state=tkinter.NORMAL)
+        text_top_dport.config(state=tkinter.NORMAL)
 
     manual_input_ctrl() #手動Frame入力規制/解除
 
 
 #手動Frame入力規制/解除関数
 def manual_input_ctrl():
-    print("manual_input_ctrl")
-    print(radio_top_text[radio_top_grp.get()])
-    print(start_flag)
     if radio_top_text[radio_top_grp.get()] == 'auto' or start_flag == True:
-        #TOP
-        text_top_dstip.config(state=tkinter.DISABLED)
-        text_top_dport.config(state=tkinter.DISABLED)
         #IP
         text_ip_ver.config(state=tkinter.DISABLED)
         text_ip_ihl.config(state=tkinter.DISABLED)
@@ -102,9 +100,6 @@ def manual_input_ctrl():
         text_data_data.config(state=tkinter.DISABLED)
         return
     else:
-        #TOP
-        text_top_dstip.config(state=tkinter.NORMAL)
-        text_top_dport.config(state=tkinter.NORMAL)
         #IP
         text_ip_ver.config(state=tkinter.NORMAL)
         text_ip_ihl.config(state=tkinter.NORMAL)
