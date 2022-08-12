@@ -46,7 +46,7 @@ def input_ctrl(inhibit):
         text_ip_protocol.config(state=tkinter.DISABLED)
         text_ip_chksum.config(state=tkinter.DISABLED)
         text_ip_srcip.config(state=tkinter.DISABLED)
-        text_ip_dstip.config(state=tkinter.DISABLED)
+        #text_ip_dstip.config(state=tkinter.DISABLED)
         text_ip_opt.config(state=tkinter.DISABLED)
         text_ip_pad.config(state=tkinter.DISABLED)
         #UDP
@@ -80,7 +80,7 @@ def input_ctrl(inhibit):
         text_ip_pad.config(state=tkinter.NORMAL)
         #UDP
         text_udp_sport.config(state=tkinter.NORMAL)
-        text_udp_dport.config(state=tkinter.NORMAL)
+        #text_udp_dport.config(state=tkinter.NORMAL)
         text_udp_dtl.config(state=tkinter.NORMAL)
         text_udp_chksum.config(state=tkinter.NORMAL)
         #DATA
@@ -245,7 +245,7 @@ text_ip_srcip.grid(row=0, column=1, sticky=tkinter.W)
 #送信先IPアドレス
 label_ip_dstip = tkinter.Label(frame_ip4, text="送信先IPアドレス (空白->自動 | IPv4):")
 label_ip_dstip.grid(row=0, column=2, sticky=tkinter.W, padx=(5,0))
-text_ip_dstip = tkinter.Entry(frame_ip4, width=16)
+text_ip_dstip = tkinter.Entry(frame_ip4, width=16, state=tkinter.DISABLED)
 text_ip_dstip.grid(row=0, column=3, sticky=tkinter.W)
 
 
@@ -287,7 +287,7 @@ text_udp_sport.grid(row=1, column=1, sticky=tkinter.W)
 #送信先ポート番号
 label_udp_dport = tkinter.Label(frame_udp1, text="送信先ポート番号 (0-65535):")
 label_udp_dport.grid(row=1, column=2, sticky=tkinter.W, padx=(5,0))
-text_udp_dport = tkinter.Entry(frame_udp1, width=6)
+text_udp_dport = tkinter.Entry(frame_udp1, width=6, state=tkinter.DISABLED)
 text_udp_dport.grid(row=1, column=3, sticky=tkinter.W)
 
 #UDP: 2行目--------------------
