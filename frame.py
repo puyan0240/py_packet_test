@@ -88,6 +88,16 @@ def entry_data_input():
         #Version
         if pkt.set_ip_ver(text_ip_ver.get()) == pkt.ERROR_RANGE:
             return "versionの範囲が不正です(0-15)"
+        #ヘッダ長
+        if pkt.set_ip_ihl(text_ip_ihl.get()) == pkt.ERROR_RANGE:
+            return "ヘッダ長の範囲が不正です(0-15)"
+        #TOS
+        if pkt.set_ip_tos(text_ip_tos.get()) == pkt.ERROR_RANGE:
+            return "TOSの範囲が不正です(0-127)"
+        #全長
+        if pkt.set_ip_tl(text_ip_tl.get()) == pkt.ERROR_RANGE:
+            return "全長の範囲が不正です(0-65535)"
+
     return "OK"
 
 #手動Frame入力規制/解除関数

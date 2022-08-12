@@ -40,8 +40,8 @@ class packetClass():
             return self.ERROR_NO_VALUE
         else:
             try:
-                port = int(dport)
-                if port < 0 or port > 65535:
+                val = int(dport)
+                if val < 0 or val > 65535:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -51,10 +51,43 @@ class packetClass():
     def set_ip_ver(self, ip_ver):
         if ip_ver != "":
             try:
-                port = int(ip_ver)
-                if port < 0 or port > 15:
+                val = int(ip_ver)
+                if val < 0 or val > 15:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
         self.ip_ver = ip_ver
+        return self.OK
+    
+    def set_ip_ihl(self, ip_ihl):
+        if ip_ihl != "":
+            try:
+                val = int(ip_ihl)
+                if val < 0 or val > 15:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_ihl = ip_ihl
+        return self.OK
+    
+    def set_ip_tos(self, ip_tos):
+        if ip_tos != "":
+            try:
+                val = int(ip_tos)
+                if val < 0 or val > 127:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_tos = ip_tos
+        return self.OK
+    
+    def set_ip_tl(self, ip_tl):
+        if ip_tl != "":
+            try:
+                val = int(ip_tl)
+                if val < 0 or val > 65535:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_tl = ip_tl
         return self.OK
