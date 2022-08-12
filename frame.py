@@ -37,11 +37,27 @@ def btn_top_click():
                 messagebox.showerror("エラー", "送信先ポート番号の範囲が不正です(0-65535)")
                 return
 
+        #送信先IPアドレスとポート番号の入力値を手動Frameにも反映する
+        text_ip_dstip.config(state=tkinter.NORMAL)
+        text_ip_dstip.insert(tkinter.END, text_top_dstip.get())
+        text_ip_dstip.config(state=tkinter.DISABLED)
+        text_udp_dport.config(state=tkinter.NORMAL)
+        text_udp_dport.insert(tkinter.END, text_top_dport.get())
+        text_udp_dport.config(state=tkinter.DISABLED)
+
         start_flag = True
         btn_top.config(text='停止', bg='RED')
         #入力規制
         input_ctrl(True)
     else:
+        #手動Frameの送信先IPアドレスとポート番号をクリア
+        text_ip_dstip.config(state=tkinter.NORMAL)
+        text_ip_dstip.delete(0, tkinter.END)    #Entryクリア
+        text_ip_dstip.config(state=tkinter.DISABLED)
+        text_udp_dport.config(state=tkinter.NORMAL)
+        text_udp_dport.delete(0, tkinter.END)   #Entryクリア
+        text_udp_dport.config(state=tkinter.DISABLED)
+
         start_flag = False
         btn_top.config(text='開始', bg='GREEN')
         #入力規制解除
@@ -68,7 +84,7 @@ def input_ctrl(inhibit):
         text_ip_protocol.config(state=tkinter.DISABLED)
         text_ip_chksum.config(state=tkinter.DISABLED)
         text_ip_srcip.config(state=tkinter.DISABLED)
-        #text_ip_dstip.config(state=tkinter.DISABLED)
+        text_ip_dstip.config(state=tkinter.DISABLED)
         text_ip_opt.config(state=tkinter.DISABLED)
         text_ip_pad.config(state=tkinter.DISABLED)
         #UDP
@@ -97,7 +113,7 @@ def input_ctrl(inhibit):
         text_ip_protocol.config(state=tkinter.NORMAL)
         text_ip_chksum.config(state=tkinter.NORMAL)
         text_ip_srcip.config(state=tkinter.NORMAL)
-        text_ip_dstip.config(state=tkinter.NORMAL)
+        #text_ip_dstip.config(state=tkinter.NORMAL)
         text_ip_opt.config(state=tkinter.NORMAL)
         text_ip_pad.config(state=tkinter.NORMAL)
         #UDP
