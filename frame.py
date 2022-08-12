@@ -17,18 +17,75 @@ def btn_top_click():
     if start_flag == False:
         start_flag = True
         btn_top.config(text='停止', bg='RED')
-
-        #ラジオボタン規制
-        radio_top_auto.config(state=tkinter.DISABLED)
-        radio_top_manual.config(state=tkinter.DISABLED)
-
+        #入力規制
+        input_ctrl(True)
     else:
         start_flag = False
         btn_top.config(text='開始', bg='GREEN')
+        #入力規制解除
+        input_ctrl(False)
 
-        #ラジオボタン規制解除
+
+#入力規制関数
+def input_ctrl(inhibit):
+    if inhibit == True:
+        #TOP
+        radio_top_auto.config(state=tkinter.DISABLED)
+        radio_top_manual.config(state=tkinter.DISABLED)
+        text_top_dstip.config(state=tkinter.DISABLED)
+        text_top_dport.config(state=tkinter.DISABLED)
+        #IP
+        text_ip_ver.config(state=tkinter.DISABLED)
+        text_ip_ihl.config(state=tkinter.DISABLED)
+        text_ip_tos.config(state=tkinter.DISABLED)
+        text_ip_tl.config(state=tkinter.DISABLED)
+        text_ip_id.config(state=tkinter.DISABLED)
+        text_ip_flags.config(state=tkinter.DISABLED)
+        text_ip_foffset.config(state=tkinter.DISABLED)
+        text_ip_ttl.config(state=tkinter.DISABLED)
+        text_ip_protocol.config(state=tkinter.DISABLED)
+        text_ip_chksum.config(state=tkinter.DISABLED)
+        text_ip_srcip.config(state=tkinter.DISABLED)
+        text_ip_dstip.config(state=tkinter.DISABLED)
+        text_ip_opt.config(state=tkinter.DISABLED)
+        text_ip_pad.config(state=tkinter.DISABLED)
+        #UDP
+        text_udp_sport.config(state=tkinter.DISABLED)
+        text_udp_dport.config(state=tkinter.DISABLED)
+        text_udp_dtl.config(state=tkinter.DISABLED)
+        text_udp_chksum.config(state=tkinter.DISABLED)
+        #DATA
+        text_data_data.config(state=tkinter.DISABLED)
+        return
+    else:
+        #TOP
         radio_top_auto.config(state=tkinter.NORMAL)
         radio_top_manual.config(state=tkinter.NORMAL)
+        text_top_dstip.config(state=tkinter.NORMAL)
+        text_top_dport.config(state=tkinter.NORMAL)
+        #IP
+        text_ip_ver.config(state=tkinter.NORMAL)
+        text_ip_ihl.config(state=tkinter.NORMAL)
+        text_ip_tos.config(state=tkinter.NORMAL)
+        text_ip_tl.config(state=tkinter.NORMAL)
+        text_ip_id.config(state=tkinter.NORMAL)
+        text_ip_flags.config(state=tkinter.NORMAL)
+        text_ip_foffset.config(state=tkinter.NORMAL)
+        text_ip_ttl.config(state=tkinter.NORMAL)
+        text_ip_protocol.config(state=tkinter.NORMAL)
+        text_ip_chksum.config(state=tkinter.NORMAL)
+        text_ip_srcip.config(state=tkinter.NORMAL)
+        text_ip_dstip.config(state=tkinter.NORMAL)
+        text_ip_opt.config(state=tkinter.NORMAL)
+        text_ip_pad.config(state=tkinter.NORMAL)
+        #UDP
+        text_udp_sport.config(state=tkinter.NORMAL)
+        text_udp_dport.config(state=tkinter.NORMAL)
+        text_udp_dtl.config(state=tkinter.NORMAL)
+        text_udp_chksum.config(state=tkinter.NORMAL)
+        #DATA
+        text_data_data.config(state=tkinter.NORMAL)
+        return
 
 
 
