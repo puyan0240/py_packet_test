@@ -15,7 +15,7 @@ pkt = packetClass.packetClass()
 #ラジオボタン押下
 def radio_top_click():
     #print("ラジオボタン押下:"+str(radio_top_text[radio_top_grp.get()]))
-    manual_input_ctrl() #手動Frame入力規制/解除
+    manual_entry_ctrl() #手動Frame入力規制/解除
 
 
 #開始/停止ボタン押下
@@ -69,11 +69,11 @@ def btn_top_click():
         text_top_dstip.config(state=tkinter.NORMAL)
         text_top_dport.config(state=tkinter.NORMAL)
 
-    manual_input_ctrl() #手動Frame入力規制/解除
+    manual_entry_ctrl() #手動Frame入力規制/解除
 
 
 #手動Frame入力規制/解除関数
-def manual_input_ctrl():
+def manual_entry_ctrl():
     if radio_top_text[radio_top_grp.get()] == 'auto' or start_flag == True:
         #IP
         text_ip_ver.config(state=tkinter.DISABLED)
@@ -371,6 +371,6 @@ frame_status = tkinter.Frame(root, relief=tkinter.SOLID, bd=1)
 frame_status.pack(fill=tkinter.X)
 
 
-manual_input_ctrl() #手動Frame入力規制/解除
+manual_entry_ctrl() #手動Frame入力規制/解除
 
 root.mainloop()
