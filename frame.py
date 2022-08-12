@@ -9,6 +9,7 @@ start_flag = False
 #ラジオボタン押下
 def radio_top_click():
     print("ラジオボタン押下:"+str(radio_top_text[radio_top_grp.get()]))
+    manual_input_ctrl() #手動Frame入力規制/解除
 
 
 #開始/停止ボタン押下
@@ -48,7 +49,8 @@ def btn_top_click():
         start_flag = True
         btn_top.config(text='停止', bg='RED')
         #入力規制
-        input_ctrl(True)
+        radio_top_auto.config(state=tkinter.DISABLED)   #TOPラジオボタン
+        radio_top_manual.config(state=tkinter.DISABLED) #TOPラジオボタン
     else:
         #手動Frameの送信先IPアドレスとポート番号をクリア
         text_ip_dstip.config(state=tkinter.NORMAL)
@@ -61,15 +63,19 @@ def btn_top_click():
         start_flag = False
         btn_top.config(text='開始', bg='GREEN')
         #入力規制解除
-        input_ctrl(False)
+        radio_top_auto.config(state=tkinter.NORMAL)     #TOPラジオボタン
+        radio_top_manual.config(state=tkinter.NORMAL)   #TOPラジオボタン
+
+    manual_input_ctrl() #手動Frame入力規制/解除
 
 
-#入力規制関数
-def input_ctrl(inhibit):
-    if inhibit == True:
+#手動Frame入力規制/解除関数
+def manual_input_ctrl():
+    print("manual_input_ctrl")
+    print(radio_top_text[radio_top_grp.get()])
+    print(start_flag)
+    if radio_top_text[radio_top_grp.get()] == 'auto' or start_flag == True:
         #TOP
-        radio_top_auto.config(state=tkinter.DISABLED)
-        radio_top_manual.config(state=tkinter.DISABLED)
         text_top_dstip.config(state=tkinter.DISABLED)
         text_top_dport.config(state=tkinter.DISABLED)
         #IP
@@ -97,8 +103,6 @@ def input_ctrl(inhibit):
         return
     else:
         #TOP
-        radio_top_auto.config(state=tkinter.NORMAL)
-        radio_top_manual.config(state=tkinter.NORMAL)
         text_top_dstip.config(state=tkinter.NORMAL)
         text_top_dport.config(state=tkinter.NORMAL)
         #IP
@@ -371,5 +375,8 @@ text_data_data.grid(row=1, column=1, sticky=tkinter.W)
 ###########################################################
 frame_status = tkinter.Frame(root, relief=tkinter.SOLID, bd=1)
 frame_status.pack(fill=tkinter.X)
+
+
+manual_input_ctrl() #手動Frame入力規制/解除
 
 root.mainloop()
