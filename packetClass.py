@@ -2,7 +2,7 @@ class packetClass():
     OK=0
     ERROR_NO_VALUE=1
     ERROR_RANGE=2
-    ERROR_NO_NUMBER=3
+    #ERROR_NO_NUMBER=3
 
     def __init__(self):
         print("init")
@@ -31,7 +31,7 @@ class packetClass():
 
     def set_ip_dstip(self, ip_dstip):
         if ip_dstip == "":
-            return -1
+            return self.ERROR_NO_VALUE
         self.ip_dstip = ip_dstip
         return self.OK
     
@@ -44,6 +44,7 @@ class packetClass():
                 if port < 0 or port > 65535:
                     return self.ERROR_RANGE
             except:
-                return self.ERROR_NO_NUMBER
+                return self.ERROR_RANGE
         self.udp_dport = dport
+        return self.OK
     

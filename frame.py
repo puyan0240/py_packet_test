@@ -1,11 +1,16 @@
 import tkinter
 from tkinter import ttk
 from tkinter import messagebox
+import packetClass
 
 ENTRY_WIDTH=6
 ENTRY_WIDTH_IPADDR =16
 
 start_flag = False
+
+#packetClassクラスのインスタンス
+pkt = packetClass.packetClass()
+
 
 #ラジオボタン押下
 def radio_top_click():
@@ -20,24 +25,17 @@ def btn_top_click():
     if start_flag == False: #停止->開始状態へ
 
         #IPアドレスの入力確認
-        if text_top_dstip.get() == "":
+        if pkt.set_ip_dstip(text_top_dstip.get()) == pkt.ERROR_NO_VALUE:
             messagebox.showerror("エラー", "送信先IPアドレスを入力してください")
             return
         #ポート番号の入力確認
-        if text_top_dport.get() == "":
+        ret = pkt.set_udp_dport(text_top_dport.get())
+        if ret == pkt.ERROR_NO_VALUE:
             messagebox.showerror("エラー", "送信先ポート番号を入力してください")
             return
-        else:
-            err_flag = False
-            try:
-                port = int(text_top_dport.get())    #ポート番号を数値に変換
-                if port < 0 or port > 0xffff:
-                    err_flag = True
-            except: #変換失敗した場合
-                err_flag = True
-            if err_flag == True:
-                messagebox.showerror("エラー", "送信先ポート番号の範囲が不正です(0-65535)")
-                return
+        elif ret == pkt.ERROR_RANGE:
+            messagebox.showerror("エラー", "送信先ポート番号の範囲が不正です(0-65535)")
+            return
 
         #送信先IPアドレスとポート番号の入力値を手動Frameにも反映する
         text_ip_dstip.config(state=tkinter.NORMAL)
