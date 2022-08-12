@@ -45,6 +45,11 @@ def btn_top_click():
         radio_top_manual.config(state=tkinter.DISABLED)
         text_top_dstip.config(state=tkinter.DISABLED)
         text_top_dport.config(state=tkinter.DISABLED)
+
+        #個別パケット送信
+        if radio_top_text[radio_top_grp.get()] == "manual":
+            pkt.send_packet()
+
     else:
         #手動Frameの送信先IPアドレスとポート番号をクリア
         text_ip_dstip.config(state=tkinter.NORMAL)
@@ -74,7 +79,7 @@ def entry_data_input():
     if pkt.set_ip_dstip(text_top_dstip.get()) == pkt.ERROR_NO_VALUE:
         return "送信先IPアドレスを入力してください"
 
-    #ポート番号の入力確認
+    #送信先ポート番号の入力確認
     ret = pkt.set_udp_dport(text_top_dport.get())
     if ret == pkt.ERROR_NO_VALUE:
         return "送信先ポート番号を入力してください"
@@ -392,6 +397,7 @@ label_udp_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 label_udp_sport = tkinter.Label(frame_udp1, text="送信元ポート番号 (0-65535):")
 label_udp_sport.grid(row=1, column=0, sticky=tkinter.W, padx=(5,0))
 text_udp_sport = tkinter.Entry(frame_udp1, width=ENTRY_WIDTH)
+text_udp_sport.insert(tkinter.END, "12345")
 text_udp_sport.grid(row=1, column=1, sticky=tkinter.W)
 
 #送信先ポート番号

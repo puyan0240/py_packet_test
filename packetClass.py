@@ -1,3 +1,5 @@
+from scapy.all import *
+
 class packetClass():
     OK=0
     ERROR_NO_VALUE=1
@@ -28,25 +30,7 @@ class packetClass():
         self.udp_chksum = ""
         #DATA
         self.data = ""
-
-    def set_ip_dstip(self, ip_dstip):
-        if ip_dstip == "":
-            return self.ERROR_NO_VALUE
-        self.ip_dstip = ip_dstip
-        return self.OK
-    
-    def set_udp_dport(self, dport):
-        if dport == "":
-            return self.ERROR_NO_VALUE
-        else:
-            try:
-                val = int(dport)
-                if val < 0 or val > 65535:
-                    return self.ERROR_RANGE
-            except:
-                return self.ERROR_RANGE
-        self.udp_dport = dport
-        return self.OK
+  
     
     def set_ip_ver(self, ip_ver):
         if ip_ver != "":
@@ -160,7 +144,13 @@ class packetClass():
 
     def set_ip_srcip(self, ip_srcip):
         return self.OK
-    
+
+    def set_ip_dstip(self, ip_dstip):
+        if ip_dstip == "":
+            return self.ERROR_NO_VALUE
+        self.ip_dstip = ip_dstip
+        return self.OK
+
     def set_ip_opt(self, ip_opt):
         if ip_opt != "":
             try:
@@ -194,6 +184,19 @@ class packetClass():
         self.udp_sport = udp_sport
         return self.OK
 
+    def set_udp_dport(self, dport):
+        if dport == "":
+            return self.ERROR_NO_VALUE
+        else:
+            try:
+                val = int(dport)
+                if val < 0 or val > 65535:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.udp_dport = dport
+        return self.OK
+
     def set_udp_dtl(self, udp_dtl):
         if udp_dtl != "":
             try:
@@ -219,3 +222,36 @@ class packetClass():
     def set_data(self, data):
         self.data = data
         return self.OK
+
+
+    #個別パケット送信
+    def send_packet(self):
+        pkt = IP()/UDP()/Raw()
+
+        #送信元IPアドレス
+        pkt.dst = self.ip_dstip
+
+
+        #送信元ポート番号
+        if self.udp_sport == "":
+            val = 12345
+        else:
+            val = int(self.udp_sport)
+        pkt.sport = val
+
+        #送信先ポート番号
+        pkt.dport = int(self.udp_dport)
+
+        #User DATA
+        if self.data != "":
+            pkt.load = self.data.encode()
+
+        pkt.show()
+
+        #パケット送信
+        try:
+            send(pkt)
+        except Exception as e:
+            print(e)
+
+        return
