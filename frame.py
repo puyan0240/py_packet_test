@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import ttk
+from tkinter import messagebox
 
 
 
@@ -14,7 +15,28 @@ def radio_top_click():
 def btn_top_click():
     global start_flag
 
-    if start_flag == False:
+    if start_flag == False: #停止->開始状態へ
+
+        #IPアドレスの入力確認
+        if text_top_dstip.get() == "":
+            messagebox.showerror("エラー", "送信先IPアドレスを入力してください")
+            return
+        #ポート番号の入力確認
+        if text_top_dport.get() == "":
+            messagebox.showerror("エラー", "送信先ポート番号を入力してください")
+            return
+        else:
+            err_flag = False
+            try:
+                port = int(text_top_dport.get())    #ポート番号を数値に変換
+                if port < 0 or port > 0xffff:
+                    err_flag = True
+            except: #変換失敗した場合
+                err_flag = True
+            if err_flag == True:
+                messagebox.showerror("エラー", "送信先ポート番号の範囲が不正です(0-65535)")
+                return
+
         start_flag = True
         btn_top.config(text='停止', bg='RED')
         #入力規制
