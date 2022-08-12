@@ -48,3 +48,13 @@ class packetClass():
         self.udp_dport = dport
         return self.OK
     
+    def set_ip_ver(self, ip_ver):
+        if ip_ver != "":
+            try:
+                port = int(ip_ver)
+                if port < 0 or port > 15:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_ver = ip_ver
+        return self.OK

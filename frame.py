@@ -24,18 +24,9 @@ def btn_top_click():
 
     if start_flag == False: #停止->開始状態へ
 
-        #IPアドレスの入力確認
-        if pkt.set_ip_dstip(text_top_dstip.get()) == pkt.ERROR_NO_VALUE:
-            messagebox.showerror("エラー", "送信先IPアドレスを入力してください")
-            return
-        #ポート番号の入力確認
-        ret = pkt.set_udp_dport(text_top_dport.get())
-        if ret == pkt.ERROR_NO_VALUE:
-            messagebox.showerror("エラー", "送信先ポート番号を入力してください")
-            return
-        elif ret == pkt.ERROR_RANGE:
-            messagebox.showerror("エラー", "送信先ポート番号の範囲が不正です(0-65535)")
-            return
+        #エントリー内容を反映させる
+        if entry_data_input() == 0:
+            return  #NG
 
         #送信先IPアドレスとポート番号の入力値を手動Frameにも反映する
         text_ip_dstip.config(state=tkinter.NORMAL)
@@ -71,6 +62,35 @@ def btn_top_click():
 
     manual_entry_ctrl() #手動Frame入力規制/解除
 
+
+#エントリー内容を反映させる関数
+def entry_data_input():
+    ###########################################################
+    #Frame (TOP)
+    ###########################################################
+    #送信先IPアドレス
+    if pkt.set_ip_dstip(text_top_dstip.get()) == pkt.ERROR_NO_VALUE:
+        messagebox.showerror("エラー", "送信先IPアドレスを入力してください")
+        return 0
+
+    #ポート番号の入力確認
+    ret = pkt.set_udp_dport(text_top_dport.get())
+    if ret == pkt.ERROR_NO_VALUE:
+        messagebox.showerror("エラー", "送信先ポート番号を入力してください")
+        return 0
+    elif ret == pkt.ERROR_RANGE:
+        messagebox.showerror("エラー", "送信先ポート番号の範囲が不正です(0-65535)")
+        return 0
+
+    if radio_top_text[radio_top_grp.get()] == "manual":
+        ###########################################################
+        #Frame (IP)
+        ###########################################################
+        #Version
+        if pkt.set_ip_ver(text_ip_ver.get()) == pkt.ERROR_RANGE:
+            messagebox.showerror("エラー", "versionの範囲が不正です(0-15)")
+            return 0
+    return 1 #OK
 
 #手動Frame入力規制/解除関数
 def manual_entry_ctrl():
