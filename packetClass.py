@@ -91,3 +91,94 @@ class packetClass():
                 return self.ERROR_RANGE
         self.ip_tl = ip_tl
         return self.OK
+    
+    def set_ip_id(self, ip_id):
+        if ip_id != "":
+            try:
+                val = int(ip_id)
+                if val < 0 or val > 65535:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_id = ip_id
+        return self.OK
+    
+    def set_ip_flags(self, ip_flags):
+        if ip_flags != "":
+            try:
+                val = int(ip_flags)
+                if val < 0 or val > 7:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_flags = ip_flags
+        return self.OK
+    
+    def set_ip_foffset(self, ip_foffset):
+        if ip_foffset != "":
+            try:
+                val = int(ip_foffset)
+                if val < 0 or val > 8191:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_foffset = ip_foffset
+        return self.OK
+    
+    def set_ip_ttl(self, ip_ttl):
+        if ip_ttl != "":
+            try:
+                val = int(ip_ttl)
+                if val < 0 or val > 255:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_ttl = ip_ttl
+        return self.OK
+    
+    def set_ip_protocol(self, ip_protocol):
+        if ip_protocol != "":
+            try:
+                val = int(ip_protocol)
+                if val < 0 or val > 15:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_protocol = ip_protocol
+        return self.OK
+
+    def set_ip_chksum(self, ip_chksum):
+        if ip_chksum != "":
+            try:
+                val = int(ip_chksum)
+                if val < 0 or val > 65535:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_chksum = ip_chksum
+        return self.OK
+
+    def set_ip_srcip(self, ip_srcip):
+        return self.OK
+    
+    def set_ip_opt(self, ip_opt):
+        if ip_opt != "":
+            try:
+                val = int(ip_opt)
+                if val < 0:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_opt = ip_opt
+        return self.OK
+    
+    def set_ip_pad(self, ip_pad):
+        if ip_pad != "":
+            try:
+                val = int(ip_pad)
+                if val < 0:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.ip_pad = ip_pad
+        return self.OK

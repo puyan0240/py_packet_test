@@ -97,6 +97,33 @@ def entry_data_input():
         #全長
         if pkt.set_ip_tl(text_ip_tl.get()) == pkt.ERROR_RANGE:
             return "全長の範囲が不正です(0-65535)"
+        #識別番号
+        if pkt.set_ip_id(text_ip_id.get()) == pkt.ERROR_RANGE:
+            return "識別番号の範囲が不正です(0-65535)"
+        #フラグ
+        if pkt.set_ip_flags(text_ip_flags.get()) == pkt.ERROR_RANGE:
+            return "フラグの範囲が不正です(0-7)"
+        #フラグメントオフセット
+        if pkt.set_ip_foffset(text_ip_foffset.get()) == pkt.ERROR_RANGE:
+            return "フラグメントオフセットの範囲が不正です(0-8191)"
+        #TTL
+        if pkt.set_ip_ttl(text_ip_ttl.get()) == pkt.ERROR_RANGE:
+            return "TTLの範囲が不正です(0-255)"
+        #プロトコル
+        if pkt.set_ip_protocol(text_ip_protocol.get()) == pkt.ERROR_RANGE:
+            return "プロトコルの範囲が不正です(0-15)"
+        #ヘッダチェックサム
+        if pkt.set_ip_chksum(text_ip_chksum.get()) == pkt.ERROR_RANGE:
+            return "ヘッダチェックサムの範囲が不正です(0-65535)"
+        #送信元IPアドレス
+        if pkt.set_ip_srcip(text_ip_srcip.get()) == pkt.ERROR_RANGE:
+            return "送信元IPアドレスの範囲が不正です(0-XXXXX)"
+        #オプション
+        if pkt.set_ip_opt(text_ip_opt.get()) == pkt.ERROR_RANGE:
+            return "オプションの範囲が不正です(0-)"
+        #パディング
+        if pkt.set_ip_pad(text_ip_pad.get()) == pkt.ERROR_RANGE:
+            return "パディングの範囲が不正です(0-)"
 
     return "OK"
 
