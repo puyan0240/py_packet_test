@@ -125,6 +125,25 @@ def entry_data_input():
         if pkt.set_ip_pad(text_ip_pad.get()) == pkt.ERROR_RANGE:
             return "パディングの範囲が不正です(0-)"
 
+        ###########################################################
+        #Frame (UDP)
+        ###########################################################
+        #送信元ポート番号
+        if pkt.set_udp_sport(text_udp_sport.get()) == pkt.ERROR_RANGE:
+            return "送信元ポート番号の範囲が不正です(0-65535)"
+        #データ長
+        if pkt.set_udp_dtl(text_udp_dtl.get()) == pkt.ERROR_RANGE:
+            return "データ長の範囲が不正です(0-65535)"
+        #チェックサム
+        if pkt.set_udp_chksum(text_udp_chksum.get()) == pkt.ERROR_RANGE:
+            return "チェックサムの範囲が不正です(0-65535)"
+
+        ###########################################################
+        #Frame (User DATA)
+        ###########################################################
+        pkt.set_data(text_data_data.get())
+
+
     return "OK"
 
 #手動Frame入力規制/解除関数

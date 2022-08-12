@@ -22,7 +22,7 @@ class packetClass():
         self.ip_opt = ""
         self.ip_pad = ""
         #UDP
-        self.udp_spor = ""
+        self.udp_sport = ""
         self.udp_dport = ""
         self.udp_dtl = ""
         self.udp_chksum = ""
@@ -181,4 +181,41 @@ class packetClass():
             except:
                 return self.ERROR_RANGE
         self.ip_pad = ip_pad
+        return self.OK
+    
+    def set_udp_sport(self, udp_sport):
+        if udp_sport != "":
+            try:
+                val = int(udp_sport)
+                if val < 0 or val > 65535:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.udp_sport = udp_sport
+        return self.OK
+
+    def set_udp_dtl(self, udp_dtl):
+        if udp_dtl != "":
+            try:
+                val = int(udp_dtl)
+                if val < 0 or val > 65535:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.udp_dtl = udp_dtl
+        return self.OK
+
+    def set_udp_chksum(self, udp_chksum):
+        if udp_chksum != "":
+            try:
+                val = int(udp_chksum)
+                if val < 0 or val > 65535:
+                    return self.ERROR_RANGE
+            except:
+                return self.ERROR_RANGE
+        self.udp_chksum = udp_chksum
+        return self.OK
+    
+    def set_data(self, data):
+        self.data = data
         return self.OK
