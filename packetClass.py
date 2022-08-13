@@ -10,7 +10,6 @@ class packetClass():
     #ERROR_NO_NUMBER=3
 
     def __init__(self):
-        print("init")
         #IP
         self.ip_ver = ""
         self.ip_ihl = ""
