@@ -226,23 +226,25 @@ class packetClass():
 
     #個別パケット送信
     def send_packet(self):
-        pkt = IP()/UDP()/Raw()
+        pkt_ip  = IP()
+        pkt_udp = UDP()
+        pkt_raw = Raw()
 
         #----------------------------------------------------
         #必須パラメータ
         #----------------------------------------------------
         #送信元IPアドレス
-        pkt.dst = self.ip_dstip
+        pkt_ip.dst = self.ip_dstip
 
         #送信元ポート番号
         if self.udp_sport == "":
             val = 12345
         else:
             val = int(self.udp_sport)
-        pkt.sport = val
+        pkt_udp.sport = val
 
         #送信先ポート番号
-        pkt.dport = int(self.udp_dport)
+        pkt_udp.dport = int(self.udp_dport)
 
 
         #----------------------------------------------------
@@ -250,49 +252,59 @@ class packetClass():
         #----------------------------------------------------
         #Version
         if self.ip_ver != "":
-            pkt.version = int(self.ip_ver)
+            pkt_ip.version = int(self.ip_ver)
         #ヘッダ長
         if self.ip_ihl != "":
-            pkt.ihl = int(self.ip_ihl)
+            pkt_ip.ihl = int(self.ip_ihl)
         #TOS
         if self.ip_tos != "":
-            pkt.tos = int(self.ip_tos)
+            pkt_ip.tos = int(self.ip_tos)
         #全長
         if self.ip_tl != "":
-            pkt.len = int(self.ip_tl)
+            pkt_ip.len = int(self.ip_tl)
         #識別番号
         if self.ip_id != "":
-            pkt.id = int(self.ip_id)
+            pkt_ip.id = int(self.ip_id)
         #フラグ
         if self.ip_flags != "":
-            pkt.flags = int(self.ip_flags)
+            pkt_ip.flags = int(self.ip_flags)
         #フラグメントオフセット
         if self.ip_foffset != "":
-            pkt.frag = int(self.ip_foffset)
+            pkt_ip.frag = int(self.ip_foffset)
         #TTL
         if self.ip_ttl != "":
-            pkt.ttl = int(self.ip_ttl)
+            pkt_ip.ttl = int(self.ip_ttl)
         #プロトコル
         if self.ip_protocol != "":
-            pkt.proto = int(self.ip_protocol)
+            pkt_ip.proto = int(self.ip_protocol)
         #ヘッダチェックサム
         if self.ip_chksum != "":
-            pkt.chksum = int(self.ip_chksum)
+            pkt_ip.chksum = int(self.ip_chksum)
         #オプション
         if self.ip_opt != "":
-            pkt.option = int(self.ip_opt)
+            pkt_ip.option = int(self.ip_opt)
 
 
+        #----------------------------------------------------
+        #カスタムパラメータ(UDP)
+        #----------------------------------------------------
+        #データ長
+        if self.udp_dtl != "":
+            pkt_udp.len = int(self.udp_dtl)
 
+        #----------------------------------------------------
+        #カスタムパラメータ(User DATA)
+        #----------------------------------------------------
         #User DATA
         if self.data != "":
-            pkt.load = self.data.encode()
+            pkt_raw.load = self.data.encode()
 
-        pkt.show()
+        pkt = pkt_ip/pkt_udp/pkt_raw
 
         #パケット送信
         try:
-            send(pkt)
+            pkt.show()  #DBG
+            send(pkt)   #送信
         except Exception as e:
             print(e)
 
