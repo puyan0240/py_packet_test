@@ -228,9 +228,11 @@ class packetClass():
     def send_packet(self):
         pkt = IP()/UDP()/Raw()
 
+        #----------------------------------------------------
+        #必須パラメータ
+        #----------------------------------------------------
         #送信元IPアドレス
         pkt.dst = self.ip_dstip
-
 
         #送信元ポート番号
         if self.udp_sport == "":
@@ -241,6 +243,46 @@ class packetClass():
 
         #送信先ポート番号
         pkt.dport = int(self.udp_dport)
+
+
+        #----------------------------------------------------
+        #カスタムパラメータ(IP)
+        #----------------------------------------------------
+        #Version
+        if self.ip_ver != "":
+            pkt.version = int(self.ip_ver)
+        #ヘッダ長
+        if self.ip_ihl != "":
+            pkt.ihl = int(self.ip_ihl)
+        #TOS
+        if self.ip_tos != "":
+            pkt.tos = int(self.ip_tos)
+        #全長
+        if self.ip_tl != "":
+            pkt.len = int(self.ip_tl)
+        #識別番号
+        if self.ip_id != "":
+            pkt.id = int(self.ip_id)
+        #フラグ
+        if self.ip_flags != "":
+            pkt.flags = int(self.ip_flags)
+        #フラグメントオフセット
+        if self.ip_foffset != "":
+            pkt.frag = int(self.ip_foffset)
+        #TTL
+        if self.ip_ttl != "":
+            pkt.ttl = int(self.ip_ttl)
+        #プロトコル
+        if self.ip_protocol != "":
+            pkt.proto = int(self.ip_protocol)
+        #ヘッダチェックサム
+        if self.ip_chksum != "":
+            pkt.chksum = int(self.ip_chksum)
+        #オプション
+        if self.ip_opt != "":
+            pkt.option = int(self.ip_opt)
+
+
 
         #User DATA
         if self.data != "":
