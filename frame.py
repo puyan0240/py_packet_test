@@ -76,8 +76,11 @@ def entry_data_input():
     #Frame (TOP)
     ###########################################################
     #送信先IPアドレス
-    if pkt.set_ip_dstip(text_top_dstip.get()) == pkt.ERROR_NO_VALUE:
+    retval = pkt.set_ip_dstip(text_top_dstip.get())
+    if retval == pkt.ERROR_NO_VALUE:
         return "送信先IPアドレスを入力してください"
+    elif retval == pkt.ERROR_RANGE:
+        return "送信先IPアドレスが不正です(DNS解決できません)。"
 
     #送信先ポート番号の入力確認
     ret = pkt.set_udp_dport(text_top_dport.get())
