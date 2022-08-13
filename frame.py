@@ -1,3 +1,4 @@
+from cgitb import text
 import tkinter
 from tkinter import ttk
 from tkinter import messagebox
@@ -451,10 +452,15 @@ text_data_data.grid(row=1, column=1, sticky=tkinter.W)
 
 
 ###########################################################
-#Frame (STATUS)
+#Frame (RESULT)
 ###########################################################
-frame_status = tkinter.Frame(root, relief=tkinter.SOLID, bd=1)
-frame_status.pack(fill=tkinter.X)
+frame_result = tkinter.Frame(root)
+frame_result.pack(fill=tkinter.X, pady=(60,10))
+
+#結果出力用TEXT
+text_result = tkinter.Text(frame_result,height=20, bg="WHITE", relief=tkinter.SOLID, bd=1)
+text_result.config(state=tkinter.DISABLED)  #書き込み禁止
+text_result.pack(side=tkinter.LEFT, padx=20)
 
 
 manual_entry_ctrl() #手動Frame入力規制/解除
