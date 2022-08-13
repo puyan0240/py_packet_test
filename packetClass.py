@@ -1,4 +1,7 @@
 from scapy.all import *
+from ping3 import ping
+import socket
+import time
 
 class packetClass():
     OK=0
@@ -148,6 +151,12 @@ class packetClass():
     def set_ip_dstip(self, ip_dstip):
         if ip_dstip == "":
             return self.ERROR_NO_VALUE
+        #DNS解決する
+        try:
+            ip_dstip = socket.gethostbyname(ip_dstip) #DNS解決
+        except Exception as e:
+            #print("dns err"+str(e))
+            return self.ERROR_RANGE
         self.ip_dstip = ip_dstip
         return self.OK
 
@@ -308,9 +317,20 @@ class packetClass():
 
         #パケット送信
         try:
-            pkt.show()  #DBG
+            #pkt.show()  #DBG
             send(pkt)   #送信
         except Exception as e:
-            print(e)
+            print("send err:"+str(e))
+            return "NG"
 
-        return
+
+        #疎通確認
+        time.sleep(0.1) #100ms待つ
+
+        try:
+            ping(self.ip_dstip)
+            #print(resp)
+            return "OK"
+        except Exception as e:
+            #print("ping err:"+str(e))
+            return "NG"
