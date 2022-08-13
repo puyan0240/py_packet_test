@@ -25,9 +25,19 @@ def btn_top_click():
 
     if start_flag == False: #停止->開始状態へ
 
+        #結果出力TEXTをクリアする
+        result_window_ctrl("clr", "")
+        #結果出力TEXTに表示
+        result_text = "開始"
+        result_window_ctrl("set", result_text)
+
         #エントリー内容を反映させる(※戻り値はエラー文字列)
         ret = entry_data_input()
         if ret != "OK":
+            #結果出力TEXTに表示
+            result_text = "中止: ["+ret+"]"
+            result_window_ctrl("set", result_text)
+            #ポップアップ
             messagebox.showerror("エラー", ret)
             return  #NG
 
@@ -50,7 +60,10 @@ def btn_top_click():
         #個別パケット送信
         if radio_top_text[radio_top_grp.get()] == "manual":
             retval = pkt.send_packet()
-            print(retval)
+
+            #結果出力TEXTに表示
+            result_text = "終了: ["+ret+"]"
+            result_window_ctrl("set", result_text)
 
             btn_top_click() #送信が終了したので停止状態へ戻す
 
@@ -209,6 +222,17 @@ def manual_entry_ctrl():
         text_data_data.config(state=tkinter.NORMAL)
         return
 
+
+#結果出力TEXTの表示制御
+def result_window_ctrl(cmd, msg):
+    text_result.config(state=tkinter.NORMAL)    #書き込み許可
+
+    if cmd == "clr":
+        text_result.delete("1.0", tkinter.END)  #表示クリア
+    elif cmd == "set":
+        text_result.insert(tkinter.END, msg+"\n")    #追加書き込み(改行コード付き)
+
+    text_result.config(state=tkinter.DISABLED)  #書き込み禁止
 
 
 
