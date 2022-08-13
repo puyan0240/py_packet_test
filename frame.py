@@ -57,13 +57,27 @@ def btn_top_click():
         text_top_dstip.config(state=tkinter.DISABLED)
         text_top_dport.config(state=tkinter.DISABLED)
 
-        #個別パケット送信
-        if radio_top_text[radio_top_grp.get()] == "manual":
-            retval = pkt.send_packet()
 
+        if radio_top_text[radio_top_grp.get()] == "manual":
             #結果出力TEXTに表示
-            result_text = "終了: ["+ret+"]"
-            result_window_ctrl("set", result_text)
+            result_window_ctrl("set", "パケット送信...")
+            #個別パケット送信
+            ret = pkt.send_packet()
+            if ret == "OK":
+                #結果出力TEXTに表示
+                result_window_ctrl("set", "送信成功")
+                result_window_ctrl("set", "PING検査...")
+                #PING検査
+                ret = pkt.ping_test()
+                if ret != "NG":
+                    result_text = "PING OK ["+ret+"]"
+                else:
+                    result_text = "PING NG !!!!!!!!!"
+                #結果出力TEXTに表示
+                result_window_ctrl("set", result_text)
+            else:
+                #結果出力TEXTに表示
+                result_window_ctrl("set", "送信失敗")
 
             btn_top_click() #送信が終了したので停止状態へ戻す
 

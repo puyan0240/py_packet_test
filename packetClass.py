@@ -318,18 +318,24 @@ class packetClass():
         try:
             #pkt.show()  #DBG
             send(pkt)   #送信
+            return "OK"
         except Exception as e:
-            print("send err:"+str(e))
+            #print("send err:"+str(e))
             return "NG"
 
 
-        #疎通確認
+    #PING検査
+    def ping_test(self):
+
+        print(self.ip_dstip)
+        print(type(self.ip_dstip))
+        #実行待ち(保険)
         time.sleep(0.1) #100ms待つ
 
         try:
-            ping(self.ip_dstip)
-            #print(resp)
-            return "OK"
+            #PING(ms単位で)
+            ret = ping(self.ip_dstip, unit="ms")
+            return str(int(ret))+"ms"
         except Exception as e:
             #print("ping err:"+str(e))
             return "NG"
