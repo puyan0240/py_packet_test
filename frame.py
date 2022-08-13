@@ -48,9 +48,12 @@ def btn_top_click():
 
         #個別パケット送信
         if radio_top_text[radio_top_grp.get()] == "manual":
-            pkt.send_packet()
+            retval = pkt.send_packet()
+            print(retval)
 
-    else:
+            btn_top_click() #送信が終了したので停止状態へ戻す
+
+    else:   #開始->停止状態へ
         #手動Frameの送信先IPアドレスとポート番号をクリア
         text_ip_dstip.config(state=tkinter.NORMAL)
         text_ip_dstip.delete(0, tkinter.END)    #Entryクリア
