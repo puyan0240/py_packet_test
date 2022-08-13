@@ -291,6 +291,9 @@ class packetClass():
         #データ長
         if self.udp_dtl != "":
             pkt_udp.len = int(self.udp_dtl)
+        #チェックサム
+        if self.udp_chksum != "":
+            pkt_udp.chksum = int(self.udp_chksum)
 
         #----------------------------------------------------
         #カスタムパラメータ(User DATA)
@@ -299,6 +302,8 @@ class packetClass():
         if self.data != "":
             pkt_raw.load = self.data.encode()
 
+
+        #パケット組み立て
         pkt = pkt_ip/pkt_udp/pkt_raw
 
         #パケット送信
