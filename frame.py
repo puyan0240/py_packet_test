@@ -33,7 +33,11 @@ def btn_top_click():
 
         #エントリー内容を反映させる(※戻り値はエラー文字列)
         ret = entry_data_input()
-        if ret != "OK":
+        if ret == "OK":
+            #結果出力TEXTに表示
+            result_text = "送信先IPアドレス: "+pkt.get_ip_dstip()
+            result_window_ctrl("set", result_text)
+        else:
             #結果出力TEXTに表示
             result_text = "中止: ["+ret+"]"
             result_window_ctrl("set", result_text)

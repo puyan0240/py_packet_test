@@ -159,6 +159,9 @@ class packetClass():
         self.ip_dstip = ip_dstip
         return self.OK
 
+    def get_ip_dstip(self):
+        return self.ip_dstip
+
     def set_ip_opt(self, ip_opt):
         if ip_opt != "":
             try:
@@ -326,9 +329,8 @@ class packetClass():
 
     #PING検査
     def ping_test(self):
+        #print(self.ip_dstip)
 
-        print(self.ip_dstip)
-        print(type(self.ip_dstip))
         #実行待ち(保険)
         time.sleep(0.1) #100ms待つ
 
