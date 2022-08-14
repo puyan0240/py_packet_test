@@ -12,7 +12,7 @@ class packetClass():
     #範囲
     MAX_IP_VER = 15
     MAX_IP_IHL = 15
-    MAX_IP_TOS = 127
+    MAX_IP_TOS = 255
     MAX_IP_TL = 65535
     MAX_IP_ID = 65535
     MAX_IP_FLAGS = 7
@@ -345,7 +345,7 @@ class packetClass():
         self.udp_dport = dport
         return self.OK
 
-    def set_udp_dport(self):
+    def clr_udp_dport(self):
         self.udp_dport = ""
 
     #-------------------------------------------------------
@@ -401,6 +401,7 @@ class packetClass():
     #クリア
     def param_ip_clr(self):
         self.set_ip_ver(4)
+        self.clr_ip_ihl()
         self.clr_ip_tos()
         self.clr_ip_tl()
         self.clr_ip_id()
@@ -415,6 +416,7 @@ class packetClass():
     #最大値設定(オプション/パディング除く)
     def param_ip_set_max(self):
         self.set_ip_ver(self.get_max_ip_ver())
+        self.set_ip_ihl(self.get_max_ip_ihl())
         self.set_ip_tos(self.get_max_ip_tos())
         self.set_ip_tl(self.get_max_ip_tl())
         self.set_ip_id(self.get_max_ip_id())
@@ -427,6 +429,7 @@ class packetClass():
     #最小値設定(オプション/パディング除く)
     def param_ip_set_min(self):
         self.set_ip_ver(0)
+        self.set_ip_ihl(0)
         self.set_ip_tos(0)
         self.set_ip_tl(0)
         self.set_ip_id(0)
@@ -451,14 +454,35 @@ class packetClass():
         self.set_udp_chksum(self.get_max_udp_chksum())
 
     #最小値設定
-    def param_udp_set_max(self):
+    def param_udp_set_min(self):
         self.set_udp_dtl(self.get_max_udp_dtl())
         self.set_udp_chksum(self.get_max_udp_chksum())
 
 
+    ########################################################
+    #一括設定
+    ########################################################
+    #クリア
+    def param_all_clr(self):
+        self.param_ip_clr()
+        self.param_udp_clr()
+
+    #最大値設定
+    def param_all_set_max(self):
+        self.param_all_clr()    #全クリア
+        self.param_ip_set_max()
+        self.param_udp_set_max()
+
+    #最小値設定
+    def param_all_set_min(self):
+        self.param_all_clr()    #全クリア
+        self.param_ip_set_min()
+        self.param_udp_set_min()
+
+
 
     ########################################################
-    #個別パケット送信
+    #テストパケット送信&ping確認
     ########################################################
     def send_packet(self):
         pkt_ip  = IP()
@@ -543,7 +567,7 @@ class packetClass():
 
         #パケット送信
         try:
-            #pkt.show()  #DBG
+            pkt.show()  #DBG
             send(pkt)   #送信
 
             #PING検査

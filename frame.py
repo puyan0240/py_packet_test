@@ -14,8 +14,40 @@ start_flag = False
 pkt = packetClass.packetClass()
 
 
+
+############################################################
+#テストパケット送信メイン関数
+############################################################
+def send_packet_main():
+    #テストパケット送信&ping確認
+    ret = pkt.send_packet()
+    if ret == "NG":
+        #結果出力TEXTに表示
+        result_window_ctrl("set", "異常: 応答なし")
+    else:    
+        #結果出力TEXTに表示
+        result_window_ctrl("set", "成功: 応答時間 ["+ret+"]")
+
+
+############################################################
+#テストパケット自動送信関数
+############################################################
 def send_packet_auto():
-    print("send_packet_auto(")
+    #結果出力TEXTに表示
+    result_window_ctrl("set", "全パラメータを最小値でテストパケットを送信...")
+    #全パラメータ最大値設定
+    pkt.param_all_set_min()
+    #テストパケット送信メイン関数
+    send_packet_main()
+
+    #結果出力TEXTに表示
+    result_window_ctrl("set", "全パラメータを最大値でテストパケットを送信...")
+    #全パラメータ最大値設定
+    pkt.param_all_set_max()
+    #テストパケット送信メイン関数
+    send_packet_main()
+
+
     return "OK"
 
 
@@ -35,8 +67,7 @@ def btn_top_click():
         #結果出力TEXTをクリアする
         result_window_ctrl("clr", "")
         #結果出力TEXTに表示
-        result_text = "開始"
-        result_window_ctrl("set", result_text)
+        result_window_ctrl("set", "開始")
 
         #エントリー内容を反映させる(※戻り値はエラー文字列)
         ret = entry_data_input()
@@ -72,18 +103,11 @@ def btn_top_click():
         if radio_top_text[radio_top_grp.get()] == "manual":
             #結果出力TEXTに表示
             result_window_ctrl("set", "テストパケット送信...")
-            #個別パケット送信
-            ret = pkt.send_packet()
-            if ret == "NG":
-                #結果出力TEXTに表示
-                result_window_ctrl("set", "異常: 応答なし")
-            else:    
-                #結果出力TEXTに表示
-                result_window_ctrl("set", "成功: 応答時間 ["+ret+"]")
+            #テストパケット送信メイン関数
+            send_packet_main()
         else:
+            #テストパケット自動送信関数
             send_packet_auto()
-            #結果出力TEXTに表示
-            result_window_ctrl("set", "成功")
 
         btn_top_click() #送信が終了したので停止状態へ戻す
 
