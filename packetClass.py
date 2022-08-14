@@ -51,7 +51,9 @@ class packetClass():
         self.data = ""
   
 
+    #-------------------------------------------------------
     #Version
+    #-------------------------------------------------------
     def set_ip_ver(self, ip_ver):
         if ip_ver != "":
             try:
@@ -88,8 +90,9 @@ class packetClass():
     def get_max_ip_ihl(self):
         return self.MAX_IP_IHL
 
-
+    #-------------------------------------------------------
     #TOS
+    #-------------------------------------------------------
     def set_ip_tos(self, ip_tos):
         if ip_tos != "":
             try:
@@ -107,8 +110,9 @@ class packetClass():
     def get_max_ip_tos(self):
         return self.MAX_IP_TOS
 
-
+    #-------------------------------------------------------
     #全長
+    #-------------------------------------------------------
     def set_ip_tl(self, ip_tl):
         if ip_tl != "":
             try:
@@ -126,8 +130,9 @@ class packetClass():
     def get_max_ip_tl(self):
         return self.MAX_IP_TL
     
-
+    #-------------------------------------------------------
     #識別番号
+    #-------------------------------------------------------
     def set_ip_id(self, ip_id):
         if ip_id != "":
             try:
@@ -145,8 +150,9 @@ class packetClass():
     def get_max_ip_id(self):
         return self.MAX_IP_ID
     
-
+    #-------------------------------------------------------
     #フラグ
+    #-------------------------------------------------------
     def set_ip_flags(self, ip_flags):
         if ip_flags != "":
             try:
@@ -164,8 +170,9 @@ class packetClass():
     def get_max_ip_flags(self):
         return self.MAX_IP_FLAGS
     
-
+    #-------------------------------------------------------
     #フラグメントオフセット
+    #-------------------------------------------------------
     def set_ip_foffset(self, ip_foffset):
         if ip_foffset != "":
             try:
@@ -183,8 +190,9 @@ class packetClass():
     def get_max_ip_foffset(self):
         return self.MAX_IP_FOFFSET
 
-
+    #-------------------------------------------------------
     #TTL
+    #-------------------------------------------------------
     def set_ip_ttl(self, ip_ttl):
         if ip_ttl != "":
             try:
@@ -202,8 +210,9 @@ class packetClass():
     def get_max_ip_ttl(self):
         return self.MAX_IP_TTL
 
-
+    #-------------------------------------------------------
     #プロトコル
+    #-------------------------------------------------------
     def set_ip_protocol(self, ip_protocol):
         if ip_protocol != "":
             try:
@@ -221,8 +230,9 @@ class packetClass():
     def get_max_ip_protocol(self):
         return self.MAX_IP_PROTOCOL
 
-
+    #-------------------------------------------------------
     #ヘッダチェックサム
+    #-------------------------------------------------------
     def set_ip_chksum(self, ip_chksum):
         if ip_chksum != "":
             try:
@@ -240,13 +250,15 @@ class packetClass():
     def get_max_ip_chksum(self):
         return self.MAX_IP_CHKSUM
 
-
+    #-------------------------------------------------------
     #送信元IPアドレス
+    #-------------------------------------------------------
     def set_ip_srcip(self, ip_srcip):
         return self.OK
 
-
+    #-------------------------------------------------------
     #送信先IPアドレス
+    #-------------------------------------------------------
     def set_ip_dstip(self, ip_dstip):
         if ip_dstip == "":
             return self.ERROR_NO_VALUE
@@ -262,8 +274,9 @@ class packetClass():
     def get_ip_dstip(self):
         return self.ip_dstip
 
-
+    #-------------------------------------------------------
     #オプション
+    #-------------------------------------------------------
     def set_ip_opt(self, ip_opt):
         if ip_opt != "":
             try:
@@ -278,8 +291,9 @@ class packetClass():
     def clr_ip_opt(self):
         self.ip_opt = ""
 
-
+    #-------------------------------------------------------
     #パディング
+    #-------------------------------------------------------
     def set_ip_pad(self, ip_pad):
         if ip_pad != "":
             try:
@@ -295,7 +309,9 @@ class packetClass():
         self.ip_pad = ""
 
 
+    #-------------------------------------------------------
     #送信元ポート番号
+    #-------------------------------------------------------
     def set_udp_sport(self, udp_sport):
         if udp_sport != "":
             try:
@@ -313,8 +329,9 @@ class packetClass():
     def get_max_udp_port(self):
         return self.MAX_UDP_PORT
 
-
+    #-------------------------------------------------------
     #送信先ポート番号
+    #-------------------------------------------------------
     def set_udp_dport(self, dport):
         if dport == "":
             return self.ERROR_NO_VALUE
@@ -331,8 +348,9 @@ class packetClass():
     def set_udp_dport(self):
         self.udp_dport = ""
 
-
+    #-------------------------------------------------------
     #データ長
+    #-------------------------------------------------------
     def set_udp_dtl(self, udp_dtl):
         if udp_dtl != "":
             try:
@@ -350,8 +368,9 @@ class packetClass():
     def get_max_udp_dtl(self):
         return self.MAX_UDP_DTL
 
-
+    #-------------------------------------------------------
     #チェックサム
+    #-------------------------------------------------------
     def set_udp_chksum(self, udp_chksum):
         if udp_chksum != "":
             try:
@@ -376,7 +395,71 @@ class packetClass():
         return self.OK
 
 
+    ########################################################
+    #IPパラメータクリア(IPアドレス以外)一括設定
+    ########################################################
+    #クリア
+    def param_ip_clr(self):
+        self.set_ip_ver(4)
+        self.clr_ip_tos()
+        self.clr_ip_tl()
+        self.clr_ip_id()
+        self.clr_ip_flags()
+        self.clr_ip_foffset()
+        self.clr_ip_ttl()
+        self.clr_ip_protocol()
+        self.clr_ip_chksum()
+        self.clr_ip_opt()
+        self.clr_ip_pad()
+
+    #最大値設定(オプション/パディング除く)
+    def param_ip_set_max(self):
+        self.set_ip_ver(self.get_max_ip_ver())
+        self.set_ip_tos(self.get_max_ip_tos())
+        self.set_ip_tl(self.get_max_ip_tl())
+        self.set_ip_id(self.get_max_ip_id())
+        self.set_ip_flags(self.get_max_ip_flags())
+        self.set_ip_foffset(self.get_max_ip_foffset())
+        self.set_ip_ttl(self.get_max_ip_ttl())
+        self.set_ip_protocol(self.get_max_ip_protocol())
+        self.set_ip_chksum(self.get_max_ip_chksum())
+    
+    #最小値設定(オプション/パディング除く)
+    def param_ip_set_min(self):
+        self.set_ip_ver(0)
+        self.set_ip_tos(0)
+        self.set_ip_tl(0)
+        self.set_ip_id(0)
+        self.set_ip_flags(0)
+        self.set_ip_foffset(0)
+        self.set_ip_ttl(0)
+        self.set_ip_protocol(0)
+        self.set_ip_chksum(0)
+
+
+    ########################################################
+    #UDPパラメータクリア(ポート番号以外)一括設定
+    ########################################################
+    #クリア
+    def param_udp_clr(self):
+        self.clr_udp_dtl()
+        self.clr_udp_chksum()
+    
+    #最大値設定
+    def param_udp_set_max(self):
+        self.set_udp_dtl(self.get_max_udp_dtl())
+        self.set_udp_chksum(self.get_max_udp_chksum())
+
+    #最小値設定
+    def param_udp_set_max(self):
+        self.set_udp_dtl(self.get_max_udp_dtl())
+        self.set_udp_chksum(self.get_max_udp_chksum())
+
+
+
+    ########################################################
     #個別パケット送信
+    ########################################################
     def send_packet(self):
         pkt_ip  = IP()
         pkt_udp = UDP()
