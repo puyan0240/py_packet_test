@@ -64,18 +64,21 @@ def send_packet_auto():
         #最大値取得
         max = pkt.max_ip_tbl[key]
         #print(key+" max:"+str(max))
-
-        func = "pkt.set_"+key   #関数名作成
+        #呼び出す関数名を作成
+        func = "pkt.set_"+key
 
         if key == "ip_ver" or key == "ip_flags" or key == "ip_protocol":    #全て検査
             #結果出力TEXTに表示
             resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "項目: "
             if key == 'ip_ver':
-                resutl_text += "Version"
+                param_name = "Version"
+                resutl_text += param_name
             elif key == "ip_flags":
-                resutl_text += "フラグ"
+                param_name = "フラグ"
+                resutl_text += param_name
             elif key == "ip_protocol":
-                resutl_text += "プロトコル"
+                param_name = "プロトコル"
+                resutl_text += param_name
             else:
                 resutl_text += "Unkonwn"
             resutl_text += " 全範囲検査"
@@ -95,19 +98,26 @@ def send_packet_auto():
             #結果出力TEXTに表示
             resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "項目: "
             if key == 'ip_ihl':
-                resutl_text += "ヘッダ長"
+                param_name = "ヘッダ長"
+                resutl_text += param_name
             elif key == "ip_tos":
-                resutl_text += "TOS"
+                param_name = "TOS"
+                resutl_text += param_name
             elif key == "ip_tl":
-                resutl_text += "全長"
+                param_name = "全長"
+                resutl_text += param_name
             elif key == "ip_id":
-                resutl_text += "識別番号"
+                param_name = "識別番号"
+                resutl_text += param_name
             elif key == "ip_foffset":
-                resutl_text += "フラグメントオフセット"
+                param_name = "フラグメントオフセット"
+                resutl_text += param_name
             elif key == "ip_ttl":
-                resutl_text += "TTL"
+                param_name = "TTL"
+                resutl_text += param_name
             elif key == "ip_chksum":
-                resutl_text += "ヘッダチェックサム"
+                param_name = "ヘッダチェックサム"
+                resutl_text += param_name
             else:
                 resutl_text += "Unkonwn"
             resutl_text += " ランダム検査("+ str(MAX_PKT_RANDOM)+"種類)"
@@ -129,7 +139,8 @@ def send_packet_auto():
         if err_flag == False:
             result_window_ctrl("set", "  OK")
         else:
-            result_window_ctrl("set", "異常: 応答なし")
+            result_window_ctrl("set", "  異常: 応答なし!!!!!!!!!!!")
+            result_window_ctrl("set", "  "+param_name+":"+str(val))
             return "NG"
 
     #-------------------------------------------------------
@@ -146,17 +157,20 @@ def send_packet_auto():
         #最大値取得
         max = pkt.max_udp_tbl[key]
         #print(key+" max:"+str(max))
-
-        func = "pkt.set_"+key   #関数名作成
+        #呼び出す関数名を作成
+        func = "pkt.set_"+key
 
         #ランダムで抜き取り検査
         if key != "udp_port":
+            count += 1
             #結果出力TEXTに表示
-            resutl_text = " "+ str(count +1) + "/"+ str(len(pkt.max_udp_tbl) -1) + "項目: "
+            resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_udp_tbl) -1) + "項目: "    #-1はudp_port分
             if key == 'udp_dtl':
-                resutl_text += "データ長"
+                param_name = "データ長"
+                resutl_text += param_name
             elif key == "udp_chksum":
-                resutl_text += "チェックサム"
+                param_name = "チェックサム"
+                resutl_text += param_name
             else:
                 resutl_text += "Unkonwn"
             resutl_text += " ランダム検査("+ str(MAX_PKT_RANDOM)+"種類)"
@@ -178,7 +192,8 @@ def send_packet_auto():
             if err_flag == False:
                 result_window_ctrl("set", "  OK")
             else:
-                result_window_ctrl("set", "異常: 応答なし")
+                result_window_ctrl("set", "  異常: 応答なし!!!!!!!!!!!")
+                result_window_ctrl("set", "  "+param_name+":"+str(val))
                 return "NG"
 
     #結果出力TEXTに表示
