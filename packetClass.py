@@ -8,6 +8,23 @@ class packetClass():
     ERROR_RANGE=2
     #ERROR_NO_NUMBER=3
 
+    #範囲
+    MAX_IP_VER=15
+    MAX_IP_IHL=15
+    MAX_IP_TOS=127
+    MAX_IP_TL=65535
+    MAX_IP_ID=65535
+    MAX_IP_FLAGS=7
+    MAX_IP_FOFFSET=8191
+    MAX_IP_TTL=255
+    MAX_IP_PROTOCOL=15
+    MAX_IP_CHKSUM=65535
+    MAX_UDP_PORT=65535
+    MAX_UDP_DTL=65535
+    MAX_UDP_CHKSUM=65535
+
+
+
     def __init__(self):
         #IP
         self.ip_ver = ""
@@ -37,7 +54,7 @@ class packetClass():
         if ip_ver != "":
             try:
                 val = int(ip_ver)
-                if val < 0 or val > 15:
+                if val < 0 or val > self.MAX_IP_VER:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -48,7 +65,7 @@ class packetClass():
         if ip_ihl != "":
             try:
                 val = int(ip_ihl)
-                if val < 0 or val > 15:
+                if val < 0 or val > self.MAX_IP_IHL:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -59,7 +76,7 @@ class packetClass():
         if ip_tos != "":
             try:
                 val = int(ip_tos)
-                if val < 0 or val > 127:
+                if val < 0 or val > self.MAX_IP_TOS:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -70,7 +87,7 @@ class packetClass():
         if ip_tl != "":
             try:
                 val = int(ip_tl)
-                if val < 0 or val > 65535:
+                if val < 0 or val > self.MAX_IP_TL:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -81,7 +98,7 @@ class packetClass():
         if ip_id != "":
             try:
                 val = int(ip_id)
-                if val < 0 or val > 65535:
+                if val < 0 or val > self.MAX_IP_ID:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -92,7 +109,7 @@ class packetClass():
         if ip_flags != "":
             try:
                 val = int(ip_flags)
-                if val < 0 or val > 7:
+                if val < 0 or val > self.MAX_IP_FLAGS:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -103,7 +120,7 @@ class packetClass():
         if ip_foffset != "":
             try:
                 val = int(ip_foffset)
-                if val < 0 or val > 8191:
+                if val < 0 or val > self.MAX_IP_FOFFSET:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -114,7 +131,7 @@ class packetClass():
         if ip_ttl != "":
             try:
                 val = int(ip_ttl)
-                if val < 0 or val > 255:
+                if val < 0 or val > self.MAX_IP_TTL:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -125,7 +142,7 @@ class packetClass():
         if ip_protocol != "":
             try:
                 val = int(ip_protocol)
-                if val < 0 or val > 15:
+                if val < 0 or val > self.MAX_IP_PROTOCOL:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -136,7 +153,7 @@ class packetClass():
         if ip_chksum != "":
             try:
                 val = int(ip_chksum)
-                if val < 0 or val > 65535:
+                if val < 0 or val > self.MAX_IP_CHKSUM:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -187,7 +204,7 @@ class packetClass():
         if udp_sport != "":
             try:
                 val = int(udp_sport)
-                if val < 0 or val > 65535:
+                if val < 0 or val > self.MAX_UDP_PORT:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -200,7 +217,7 @@ class packetClass():
         else:
             try:
                 val = int(dport)
-                if val < 0 or val > 65535:
+                if val < 0 or val > self.MAX_UDP_PORT:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -211,7 +228,7 @@ class packetClass():
         if udp_dtl != "":
             try:
                 val = int(udp_dtl)
-                if val < 0 or val > 65535:
+                if val < 0 or val > self.MAX_UDP_DTL:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -222,7 +239,7 @@ class packetClass():
         if udp_chksum != "":
             try:
                 val = int(udp_chksum)
-                if val < 0 or val > 65535:
+                if val < 0 or val > self.MAX_IP_CHKSUM:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
