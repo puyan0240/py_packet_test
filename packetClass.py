@@ -1,6 +1,7 @@
 from scapy.all import *
 from ping3 import ping
 import socket
+import time
 
 class packetClass():
     OK=0
@@ -376,7 +377,10 @@ class packetClass():
         try:
             #pkt.show()  #DBG
             send(pkt)   #送信
-            return "OK"
+
+            #PING検査
+            time.sleep(0.01)    #10ms
+            return self.ping_test()
         except Exception as e:
             #print("send err:"+str(e))
             return "NG"
