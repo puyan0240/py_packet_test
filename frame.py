@@ -47,6 +47,36 @@ def send_packet_auto():
     #テストパケット送信メイン関数
     send_packet_main()
 
+    #-------------------------------------------------------
+    #IPヘッダ
+    #-------------------------------------------------------
+    #結果出力TEXTに表示
+    result_window_ctrl("set", "IPヘッダを変更してテストパケットを送信...")
+    count=0
+    for key in pkt.max_ip_tbl:
+        count += 1
+        #パラメータ全クリア
+        pkt.param_all_clr()
+        #最大値取得
+        max = pkt.max_ip_tbl[key]
+        #print(key+" max:"+str(max))
+
+        if key == "ip_ver" or key == "ip_ihl":
+            for val in range(max+1):
+                func = "pkt.set_"+key
+                eval(func)(str(val))
+
+                #テストパケット送信&ping確認
+                ret = pkt.send_packet()
+                if ret == "NG":
+                    break
+
+        #結果出力TEXTに表示
+        resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "回 完了"
+        result_window_ctrl("set", resutl_text)
+        text_result.update()
+
+
 
     return "OK"
 

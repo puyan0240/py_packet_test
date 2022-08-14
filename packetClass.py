@@ -570,11 +570,11 @@ class packetClass():
 
         #パケット送信
         try:
-            pkt.show()  #DBG
+            #pkt.show()  #DBG
             send(pkt)   #送信
 
             #PING検査
-            time.sleep(0.01)    #10ms
+            #time.sleep(0.01)    #10ms
             return self.ping_test()
         except Exception as e:
             #print("send err:"+str(e))
