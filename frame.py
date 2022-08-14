@@ -3,6 +3,7 @@ import tkinter
 from tkinter import ttk
 from tkinter import messagebox
 import packetClass
+import time
 
 ENTRY_WIDTH=6
 ENTRY_WIDTH_IPADDR =16
@@ -71,7 +72,9 @@ def btn_top_click():
                 #結果出力TEXTに表示
                 result_window_ctrl("set", "送信成功")
                 result_window_ctrl("set", "PING検査...")
+
                 #PING検査
+                time.sleep(0.1) #100ms待つ
                 ret = pkt.ping_test()
                 if ret != "NG":
                     result_text = "PING OK ["+ret+"]"

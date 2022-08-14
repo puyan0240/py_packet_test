@@ -1,7 +1,6 @@
 from scapy.all import *
 from ping3 import ping
 import socket
-import time
 
 class packetClass():
     OK=0
@@ -330,9 +329,6 @@ class packetClass():
     #PING検査
     def ping_test(self):
         #print(self.ip_dstip)
-
-        #実行待ち(保険)
-        time.sleep(0.1) #100ms待つ
 
         try:
             #PING(ms単位で)
