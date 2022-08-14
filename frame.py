@@ -116,7 +116,7 @@ def entry_data_input():
     if ret == pkt.ERROR_NO_VALUE:
         return "送信先ポート番号を入力してください"
     elif ret == pkt.ERROR_RANGE:
-        return "送信先ポート番号の範囲が不正です(0-65535)"
+        return "送信先ポート番号の範囲が不正です(0-"+pkt.str(pkt.get_max_udp_port())+")"
 
     if radio_top_text[radio_top_grp.get()] == "manual":
         ###########################################################
@@ -124,34 +124,34 @@ def entry_data_input():
         ###########################################################
         #Version
         if pkt.set_ip_ver(text_ip_ver.get()) == pkt.ERROR_RANGE:
-            return "versionの範囲が不正です(0-15)"
+            return "versionの範囲が不正です(0-"+str(pkt.get_max_ip_ver())+")"
         #ヘッダ長
         if pkt.set_ip_ihl(text_ip_ihl.get()) == pkt.ERROR_RANGE:
-            return "ヘッダ長の範囲が不正です(0-15)"
+            return "ヘッダ長の範囲が不正です(0-"+str(pkt.get_max_ip_ihl())+")"
         #TOS
         if pkt.set_ip_tos(text_ip_tos.get()) == pkt.ERROR_RANGE:
-            return "TOSの範囲が不正です(0-127)"
+            return "TOSの範囲が不正です(0-"+str(pkt.get_max_ip_tos())+")"
         #全長
         if pkt.set_ip_tl(text_ip_tl.get()) == pkt.ERROR_RANGE:
-            return "全長の範囲が不正です(0-65535)"
+            return "全長の範囲が不正です(0-"+str(pkt.get_max_ip_tl())+")"
         #識別番号
         if pkt.set_ip_id(text_ip_id.get()) == pkt.ERROR_RANGE:
-            return "識別番号の範囲が不正です(0-65535)"
+            return "識別番号の範囲が不正です(0-"+str(pkt.get_max_ip_id())+")"
         #フラグ
         if pkt.set_ip_flags(text_ip_flags.get()) == pkt.ERROR_RANGE:
-            return "フラグの範囲が不正です(0-7)"
+            return "フラグの範囲が不正です(0-"+str(pkt.get_max_ip_flags())+")"
         #フラグメントオフセット
         if pkt.set_ip_foffset(text_ip_foffset.get()) == pkt.ERROR_RANGE:
-            return "フラグメントオフセットの範囲が不正です(0-8191)"
+            return "フラグメントオフセットの範囲が不正です(0-"+str(pkt.get_max_ip_foffset())+")"
         #TTL
         if pkt.set_ip_ttl(text_ip_ttl.get()) == pkt.ERROR_RANGE:
-            return "TTLの範囲が不正です(0-255)"
+            return "TTLの範囲が不正です(0-"+str(pkt.get_max_ip_ttl())+")"
         #プロトコル
         if pkt.set_ip_protocol(text_ip_protocol.get()) == pkt.ERROR_RANGE:
-            return "プロトコルの範囲が不正です(0-15)"
+            return "プロトコルの範囲が不正です(0-"+str(pkt.get_max_ip_protocol())+")"
         #ヘッダチェックサム
         if pkt.set_ip_chksum(text_ip_chksum.get()) == pkt.ERROR_RANGE:
-            return "ヘッダチェックサムの範囲が不正です(0-65535)"
+            return "ヘッダチェックサムの範囲が不正です(0-"+str(pkt.get_max_ip_chksum())+")"
         #送信元IPアドレス
         if pkt.set_ip_srcip(text_ip_srcip.get()) == pkt.ERROR_RANGE:
             return "送信元IPアドレスの範囲が不正です(0-XXXXX)"
@@ -167,13 +167,13 @@ def entry_data_input():
         ###########################################################
         #送信元ポート番号
         if pkt.set_udp_sport(text_udp_sport.get()) == pkt.ERROR_RANGE:
-            return "送信元ポート番号の範囲が不正です(0-65535)"
+            return "送信元ポート番号の範囲が不正です(0-"+str(pkt.get_max_udp_port())+")"
         #データ長
         if pkt.set_udp_dtl(text_udp_dtl.get()) == pkt.ERROR_RANGE:
-            return "データ長の範囲が不正です(0-65535)"
+            return "データ長の範囲が不正です(0-"+str(pkt.get_max_udp_dtl())+")"
         #チェックサム
         if pkt.set_udp_chksum(text_udp_chksum.get()) == pkt.ERROR_RANGE:
-            return "チェックサムの範囲が不正です(0-65535)"
+            return "チェックサムの範囲が不正です(0-"+str(pkt.get_max_udp_chksum())+")"
 
         ###########################################################
         #Frame (User DATA)
