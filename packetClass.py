@@ -319,7 +319,6 @@ class packetClass():
         if udp_sport != "":
             try:
                 val = int(udp_sport)
-                #if val < 0 or val > self.MAX_UDP_PORT:
                 if val < 0 or val > self.max_udp_tbl["udp_port"]:
                     return self.ERROR_RANGE
             except:
@@ -342,7 +341,7 @@ class packetClass():
         else:
             try:
                 val = int(dport)
-                if val < 0 or val > self.MAX_UDP_PORT:
+                if val < 0 or val > self.max_udp_tbl["udp_port"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE

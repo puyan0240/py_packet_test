@@ -148,7 +148,7 @@ def entry_data_input():
     if ret == pkt.ERROR_NO_VALUE:
         return "送信先ポート番号を入力してください"
     elif ret == pkt.ERROR_RANGE:
-        return "送信先ポート番号の範囲が不正です(0-"+pkt.str(pkt.get_max_udp_port())+")"
+        return "送信先ポート番号の範囲が不正です(0-"+str(pkt.get_max_udp_port())+")"
 
     if radio_top_text[radio_top_grp.get()] == "manual":
         ###########################################################
