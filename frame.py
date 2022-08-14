@@ -14,6 +14,12 @@ start_flag = False
 pkt = packetClass.packetClass()
 
 
+def send_packet_auto():
+    print("send_packet_auto(")
+    return "OK"
+
+
+
 #ラジオボタン押下
 def radio_top_click():
     #print("ラジオボタン押下:"+str(radio_top_text[radio_top_grp.get()]))
@@ -75,7 +81,9 @@ def btn_top_click():
                 #結果出力TEXTに表示
                 result_window_ctrl("set", "成功: 応答時間 ["+ret+"]")
         else:
-            pass
+            send_packet_auto()
+            #結果出力TEXTに表示
+            result_window_ctrl("set", "成功")
 
         btn_top_click() #送信が終了したので停止状態へ戻す
 
