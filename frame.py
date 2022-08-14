@@ -4,9 +4,11 @@ from tkinter import ttk
 from tkinter import messagebox
 import packetClass
 import time
+from common import *
 
 ENTRY_WIDTH=6
 ENTRY_WIDTH_IPADDR =16
+MAX_PKT_RANDOM =10
 
 start_flag = False
 
@@ -52,7 +54,9 @@ def send_packet_auto():
     #-------------------------------------------------------
     #結果出力TEXTに表示
     result_window_ctrl("set", "IPヘッダを変更してテストパケットを送信...")
-    count=0
+    count = 0
+    err_flag = False
+
     for key in pkt.max_ip_tbl:
         count += 1
         #パラメータ全クリア
@@ -61,25 +65,39 @@ def send_packet_auto():
         max = pkt.max_ip_tbl[key]
         #print(key+" max:"+str(max))
 
-        if key == "ip_ver" or key == "ip_ihl":
+        func = "pkt.set_"+key   #関数名作成
+
+        if key == 'ip_ver' or key == "ip_flags" or key == "ip_protocol":    #全て検査
             for val in range(max+1):
-                func = "pkt.set_"+key
-                eval(func)(str(val))
+                eval(func)(str(val))    #関数名で定義した関数を実行
 
                 #テストパケット送信&ping確認
                 ret = pkt.send_packet()
                 if ret == "NG":
+                    err_flag = True
+                    break
+        else:   #ランダムで抜き取り検査
+            random_list = random_ints_nodup(0, max, MAX_PKT_RANDOM)
+            for val in random_list:
+                eval(func)(str(val))    #関数名で定義した関数を実行
+
+                #テストパケット送信&ping確認
+                ret = pkt.send_packet()
+                if ret == "NG":
+                    err_flag = True
                     break
 
-        #結果出力TEXTに表示
-        resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "回 完了"
-        result_window_ctrl("set", resutl_text)
-        text_result.update()
+        if err_flag == False:
+            #結果出力TEXTに表示
+            resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "回 完了"
+            result_window_ctrl("set", resutl_text)
+        else:
+            result_window_ctrl("set", "異常: 応答なし")
+            return "NG"
 
-
-
+    #結果出力TEXTに表示
+    result_window_ctrl("set", "成功")
     return "OK"
-
 
 
 #ラジオボタン押下
@@ -305,6 +323,7 @@ def result_window_ctrl(cmd, msg):
         text_result.delete("1.0", tkinter.END)  #表示クリア
     elif cmd == "set":
         text_result.insert(tkinter.END, msg+"\n")    #追加書き込み(改行コード付き)
+    text_result.update()    #TEXT更新
 
     text_result.config(state=tkinter.DISABLED)  #書き込み禁止
 
