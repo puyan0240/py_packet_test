@@ -301,7 +301,10 @@ def entry_data_input():
 
     return "OK"
 
+
+############################################################
 #手動Frame入力規制/解除関数
+############################################################
 def manual_entry_ctrl():
     if radio_top_text[radio_top_grp.get()] == 'auto' or start_flag == True:
         #IP
@@ -353,7 +356,9 @@ def manual_entry_ctrl():
         return
 
 
+############################################################
 #結果出力TEXTの表示制御
+############################################################
 def result_window_ctrl(cmd, msg):
     text_result.config(state=tkinter.NORMAL)    #書き込み許可
 
@@ -361,6 +366,7 @@ def result_window_ctrl(cmd, msg):
         text_result.delete("1.0", tkinter.END)  #表示クリア
     elif cmd == "set":
         text_result.insert(tkinter.END, msg+"\n")    #追加書き込み(改行コード付き)
+        text_result.see(tkinter.END)            #最終行を表示するため自動スクロール
     text_result.update()    #TEXT更新
 
     text_result.config(state=tkinter.DISABLED)  #書き込み禁止
