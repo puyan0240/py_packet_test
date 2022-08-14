@@ -67,30 +67,67 @@ def send_packet_auto():
 
         func = "pkt.set_"+key   #関数名作成
 
-        if key == 'ip_ver' or key == "ip_flags" or key == "ip_protocol":    #全て検査
-            for val in range(max+1):
-                eval(func)(str(val))    #関数名で定義した関数を実行
-
-                #テストパケット送信&ping確認
-                ret = pkt.send_packet()
-                if ret == "NG":
-                    err_flag = True
-                    break
-        else:   #ランダムで抜き取り検査
-            random_list = random_ints_nodup(0, max, MAX_PKT_RANDOM)
-            for val in random_list:
-                eval(func)(str(val))    #関数名で定義した関数を実行
-
-                #テストパケット送信&ping確認
-                ret = pkt.send_packet()
-                if ret == "NG":
-                    err_flag = True
-                    break
-
-        if err_flag == False:
+        if key == "ip_ver" or key == "ip_flags" or key == "ip_protocol":    #全て検査
             #結果出力TEXTに表示
-            resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "回 完了"
+            resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "項目: "
+            if key == 'ip_ver':
+                resutl_text += "Version"
+            elif key == "ip_flags":
+                resutl_text += "フラグ"
+            elif key == "ip_protocol":
+                resutl_text += "プロトコル"
+            else:
+                resutl_text += "Unkonwn"
+            resutl_text += " 全範囲検査"
             result_window_ctrl("set", resutl_text)
+
+            for val in range(max+1):
+                #関数名で定義した関数を実行
+                eval(func)(str(val))
+
+                #テストパケット送信&ping確認
+                ret = pkt.send_packet()
+                if ret == "NG":
+                    err_flag = True
+                    break
+
+        else:   #ランダムで抜き取り検査
+            #結果出力TEXTに表示
+            resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_ip_tbl)) + "項目: "
+            if key == 'ip_ihl':
+                resutl_text += "ヘッダ長"
+            elif key == "ip_tos":
+                resutl_text += "TOS"
+            elif key == "ip_tl":
+                resutl_text += "全長"
+            elif key == "ip_id":
+                resutl_text += "識別番号"
+            elif key == "ip_foffset":
+                resutl_text += "フラグメントオフセット"
+            elif key == "ip_ttl":
+                resutl_text += "TTL"
+            elif key == "ip_chksum":
+                resutl_text += "ヘッダチェックサム"
+            else:
+                resutl_text += "Unkonwn"
+            resutl_text += " ランダム検査("+ str(MAX_PKT_RANDOM)+"種類)"
+            result_window_ctrl("set", resutl_text)
+
+            #ランダムリスト作成
+            random_list = random_ints_nodup(0, max, MAX_PKT_RANDOM)
+
+            for val in random_list:
+                #関数名で定義した関数を実行
+                eval(func)(str(val))
+                #テストパケット送信&ping確認
+                ret = pkt.send_packet()
+                if ret == "NG":
+                    err_flag = True
+                    break
+
+        #結果出力TEXTに表示
+        if err_flag == False:
+            result_window_ctrl("set", "  OK")
         else:
             result_window_ctrl("set", "異常: 応答なし")
             return "NG"
@@ -114,27 +151,38 @@ def send_packet_auto():
 
         #ランダムで抜き取り検査
         if key != "udp_port":
-            count += 1
-            random_list = random_ints_nodup(0, max, MAX_PKT_RANDOM)
-            for val in random_list:
-                eval(func)(str(val))    #関数名で定義した関数を実行
+            #結果出力TEXTに表示
+            resutl_text = " "+ str(count +1) + "/"+ str(len(pkt.max_udp_tbl) -1) + "項目: "
+            if key == 'udp_dtl':
+                resutl_text += "データ長"
+            elif key == "udp_chksum":
+                resutl_text += "チェックサム"
+            else:
+                resutl_text += "Unkonwn"
+            resutl_text += " ランダム検査("+ str(MAX_PKT_RANDOM)+"種類)"
+            result_window_ctrl("set", resutl_text)
 
+            #ランダムリスト作成
+            random_list = random_ints_nodup(0, max, MAX_PKT_RANDOM)
+
+            for val in random_list:
+                #関数名で定義した関数を実行
+                eval(func)(str(val))
                 #テストパケット送信&ping確認
                 ret = pkt.send_packet()
                 if ret == "NG":
                     err_flag = True
                     break
 
+            #結果出力TEXTに表示
             if err_flag == False:
-                #結果出力TEXTに表示
-                resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_udp_tbl)-1) + "回 完了"
-                result_window_ctrl("set", resutl_text)
+                result_window_ctrl("set", "  OK")
             else:
                 result_window_ctrl("set", "異常: 応答なし")
                 return "NG"
 
     #結果出力TEXTに表示
-    result_window_ctrl("set", "成功")
+    result_window_ctrl("set", "完了")
     return "OK"
 
 
