@@ -9,21 +9,24 @@ class packetClass():
     ERROR_RANGE=2
     #ERROR_NO_NUMBER=3
 
-    #範囲
-    MAX_IP_VER = 15
-    MAX_IP_IHL = 15
-    MAX_IP_TOS = 255
-    MAX_IP_TL = 65535
-    MAX_IP_ID = 65535
-    MAX_IP_FLAGS = 7
-    MAX_IP_FOFFSET = 8191
-    MAX_IP_TTL = 255
-    MAX_IP_PROTOCOL = 15
-    MAX_IP_CHKSUM = 65535
-    MAX_UDP_PORT = 65535
-    MAX_UDP_DTL = 65535
-    MAX_UDP_CHKSUM = 65535
-
+    #最大値テーブル
+    max_ip_tbl = {
+        "ip_ver":15,
+        "ip_ihl":15,
+        "ip_tos":255,
+        "ip_tl":65535,
+        "ip_id":65535,
+        "ip_flags":7,
+        "ip_foffset":8191,
+        "ip_ttl":255,
+        "ip_protocol":15,
+        "ip_chksum":65535
+    }
+    max_udp_tbl = {
+        "udp_port":65535,
+        "udp_dtl":65535,
+        "udp_chksum":65535
+    }
 
 
     def __init__(self):
@@ -58,7 +61,7 @@ class packetClass():
         if ip_ver != "":
             try:
                 val = int(ip_ver)
-                if val < 0 or val > self.MAX_IP_VER:
+                if val < 0 or val > self.max_ip_tbl["ip_ver"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -69,7 +72,7 @@ class packetClass():
         self.ip_ver = ""
     
     def get_max_ip_ver(self):
-        return self.MAX_IP_VER
+        return self.max_ip_tbl["ip_ver"]
 
 
     #ヘッダ長
@@ -77,7 +80,7 @@ class packetClass():
         if ip_ihl != "":
             try:
                 val = int(ip_ihl)
-                if val < 0 or val > self.MAX_IP_IHL:
+                if val < 0 or val > self.max_ip_tbl["ip_ihl"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -88,7 +91,7 @@ class packetClass():
         self.ip_ihl = ""
 
     def get_max_ip_ihl(self):
-        return self.MAX_IP_IHL
+        return self.max_ip_tbl["ip_ihl"]
 
     #-------------------------------------------------------
     #TOS
@@ -97,7 +100,7 @@ class packetClass():
         if ip_tos != "":
             try:
                 val = int(ip_tos)
-                if val < 0 or val > self.MAX_IP_TOS:
+                if val < 0 or val > self.max_ip_tbl["ip_tos"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -108,7 +111,7 @@ class packetClass():
         self.ip_tos = ""
 
     def get_max_ip_tos(self):
-        return self.MAX_IP_TOS
+        return self.max_ip_tbl["ip_tos"]
 
     #-------------------------------------------------------
     #全長
@@ -117,7 +120,7 @@ class packetClass():
         if ip_tl != "":
             try:
                 val = int(ip_tl)
-                if val < 0 or val > self.MAX_IP_TL:
+                if val < 0 or val > self.max_ip_tbl["ip_tl"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -128,7 +131,7 @@ class packetClass():
         self.ip_tl = ""
 
     def get_max_ip_tl(self):
-        return self.MAX_IP_TL
+        return self.max_ip_tbl["ip_tl"]
     
     #-------------------------------------------------------
     #識別番号
@@ -137,7 +140,7 @@ class packetClass():
         if ip_id != "":
             try:
                 val = int(ip_id)
-                if val < 0 or val > self.MAX_IP_ID:
+                if val < 0 or val > self.max_ip_tbl["ip_id"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -148,7 +151,7 @@ class packetClass():
         self.ip_id = ""
 
     def get_max_ip_id(self):
-        return self.MAX_IP_ID
+        return self.max_ip_tbl["ip_id"]
     
     #-------------------------------------------------------
     #フラグ
@@ -157,7 +160,7 @@ class packetClass():
         if ip_flags != "":
             try:
                 val = int(ip_flags)
-                if val < 0 or val > self.MAX_IP_FLAGS:
+                if val < 0 or val > self.max_ip_tbl["ip_flags"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -168,7 +171,7 @@ class packetClass():
         self.ip_flags = ""
 
     def get_max_ip_flags(self):
-        return self.MAX_IP_FLAGS
+        return self.max_ip_tbl["ip_flags"]
     
     #-------------------------------------------------------
     #フラグメントオフセット
@@ -177,7 +180,7 @@ class packetClass():
         if ip_foffset != "":
             try:
                 val = int(ip_foffset)
-                if val < 0 or val > self.MAX_IP_FOFFSET:
+                if val < 0 or val > self.max_ip_tbl["ip_foffset"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -188,7 +191,7 @@ class packetClass():
         self.ip_foffset = ""
     
     def get_max_ip_foffset(self):
-        return self.MAX_IP_FOFFSET
+        return self.max_ip_tbl["ip_foffset"]
 
     #-------------------------------------------------------
     #TTL
@@ -197,7 +200,7 @@ class packetClass():
         if ip_ttl != "":
             try:
                 val = int(ip_ttl)
-                if val < 0 or val > self.MAX_IP_TTL:
+                if val < 0 or val > self.max_ip_tbl["ip_ttl"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -208,7 +211,7 @@ class packetClass():
         self.ip_ttl = ""
 
     def get_max_ip_ttl(self):
-        return self.MAX_IP_TTL
+        return self.max_ip_tbl["ip_ttl"]
 
     #-------------------------------------------------------
     #プロトコル
@@ -217,7 +220,7 @@ class packetClass():
         if ip_protocol != "":
             try:
                 val = int(ip_protocol)
-                if val < 0 or val > self.MAX_IP_PROTOCOL:
+                if val < 0 or val > self.max_ip_tbl["ip_protocol"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -228,7 +231,7 @@ class packetClass():
         self.ip_protocol = ""
 
     def get_max_ip_protocol(self):
-        return self.MAX_IP_PROTOCOL
+        return self.max_ip_tbl["ip_protocol"]
 
     #-------------------------------------------------------
     #ヘッダチェックサム
@@ -237,7 +240,7 @@ class packetClass():
         if ip_chksum != "":
             try:
                 val = int(ip_chksum)
-                if val < 0 or val > self.MAX_IP_CHKSUM:
+                if val < 0 or val > self.max_ip_tbl["ip_chksum"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -248,7 +251,7 @@ class packetClass():
         self.ip_chksum = ""
 
     def get_max_ip_chksum(self):
-        return self.MAX_IP_CHKSUM
+        return self.max_ip_tbl["ip_chksum"]
 
     #-------------------------------------------------------
     #送信元IPアドレス
@@ -316,7 +319,8 @@ class packetClass():
         if udp_sport != "":
             try:
                 val = int(udp_sport)
-                if val < 0 or val > self.MAX_UDP_PORT:
+                #if val < 0 or val > self.MAX_UDP_PORT:
+                if val < 0 or val > self.max_udp_tbl["udp_port"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -327,7 +331,7 @@ class packetClass():
         self.udp_sport = ""
 
     def get_max_udp_port(self):
-        return self.MAX_UDP_PORT
+        return self.max_udp_tbl["udp_port"]
 
     #-------------------------------------------------------
     #送信先ポート番号
@@ -355,7 +359,7 @@ class packetClass():
         if udp_dtl != "":
             try:
                 val = int(udp_dtl)
-                if val < 0 or val > self.MAX_UDP_DTL:
+                if val < 0 or val > self.max_udp_tbl["udp_dtl"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -366,7 +370,7 @@ class packetClass():
         self.udp_dtl = ""
 
     def get_max_udp_dtl(self):
-        return self.MAX_UDP_DTL
+        return self.max_udp_tbl["udp_dtl"]
 
     #-------------------------------------------------------
     #チェックサム
@@ -375,7 +379,7 @@ class packetClass():
         if udp_chksum != "":
             try:
                 val = int(udp_chksum)
-                if val < 0 or val > self.MAX_IP_CHKSUM:
+                if val < 0 or val > self.max_udp_tbl["udp_chksum"]:
                     return self.ERROR_RANGE
             except:
                 return self.ERROR_RANGE
@@ -386,7 +390,7 @@ class packetClass():
         self.udp_chksum = ""
 
     def get_max_udp_chksum(self):
-        return self.MAX_UDP_CHKSUM
+        return self.max_udp_tbl["udp_chksum"]
 
 
     #User DATA
