@@ -575,7 +575,7 @@ class packetClass():
             send(pkt)   #送信
 
             #PING検査
-            time.sleep(0.02)    #20ms
+            time.sleep(0.01)    #10ms
             return self.ping_test()
         except Exception as e:
             #print("send err:"+str(e))
