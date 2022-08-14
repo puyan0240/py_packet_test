@@ -74,8 +74,9 @@ class packetClass():
     def get_max_ip_ver(self):
         return self.max_ip_tbl["ip_ver"]
 
-
+    #-------------------------------------------------------
     #ヘッダ長
+    #-------------------------------------------------------
     def set_ip_ihl(self, ip_ihl):
         if ip_ihl != "":
             try:
@@ -574,7 +575,7 @@ class packetClass():
             send(pkt)   #送信
 
             #PING検査
-            #time.sleep(0.01)    #10ms
+            time.sleep(0.02)    #20ms
             return self.ping_test()
         except Exception as e:
             #print("send err:"+str(e))
