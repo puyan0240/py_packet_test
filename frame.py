@@ -320,7 +320,8 @@ text_top_dstip = tkinter.Entry(frame_top2, width=ENTRY_WIDTH_IPADDR)
 text_top_dstip.grid(row=0, column=1, sticky=tkinter.W)
 
 #送信先ポート番号
-label_top_dport = tkinter.Label(frame_top2, text="送信先ポート番号 (0-65535):")
+label_text = "送信先ポート番号 (0-"+str(pkt.get_max_udp_port())+"):"
+label_top_dport = tkinter.Label(frame_top2, text=label_text)
 label_top_dport.grid(row=0, column=2, sticky=tkinter.W, padx=(5,0))
 text_top_dport = tkinter.Entry(frame_top2, width=ENTRY_WIDTH)
 text_top_dport.grid(row=0, column=3, sticky=tkinter.W)
@@ -351,26 +352,30 @@ label_ip_title  = tkinter.Label(frame_ip1, text=title_text, font=('System','12',
 label_ip_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #Version
-label_ip_ver = tkinter.Label(frame_ip1, text="version (0-15):")
+label_text = "version (0-"+str(pkt.get_max_ip_ver())+"):"
+label_ip_ver = tkinter.Label(frame_ip1, text=label_text)
 label_ip_ver.grid(row=1, column=0, sticky=tkinter.W, padx=(5,0))
 text_ip_ver = tkinter.Entry(frame_ip1, width=ENTRY_WIDTH)
 text_ip_ver.insert(tkinter.END, "4")
 text_ip_ver.grid(row=1, column=1, sticky=tkinter.W)
 
 #ヘッダ長
-label_ip_ihl = tkinter.Label(frame_ip1, text="ヘッダ長 (0-15):")
+label_text = "ヘッダ長 (0-"+str(pkt.get_max_ip_ihl())+"):"
+label_ip_ihl = tkinter.Label(frame_ip1, text=label_text)
 label_ip_ihl.grid(row=1, column=2, sticky=tkinter.W, padx=(5,0))
 text_ip_ihl = tkinter.Entry(frame_ip1, width=ENTRY_WIDTH)
 text_ip_ihl.grid(row=1, column=3, sticky=tkinter.W)
 
 #サービスタイプ
-label_ip_tos = tkinter.Label(frame_ip1, text="ToS (0-127):")
+label_text = "ToS (0-"+str(pkt.get_max_ip_tos())+"):"
+label_ip_tos = tkinter.Label(frame_ip1, text=label_text)
 label_ip_tos.grid(row=1, column=4, sticky=tkinter.W, padx=(5,0))
 text_ip_tos = tkinter.Entry(frame_ip1, width=ENTRY_WIDTH)
 text_ip_tos.grid(row=1, column=5, sticky=tkinter.W)
 
 #全長
-label_ip_tl = tkinter.Label(frame_ip1, text="全長 (0-65535):")
+label_text = "全長 (0-"+str(pkt.get_max_ip_tl())+"):"
+label_ip_tl = tkinter.Label(frame_ip1, text=label_text)
 label_ip_tl.grid(row=1, column=6, sticky=tkinter.W, padx=(5,0))
 text_ip_tl = tkinter.Entry(frame_ip1, width=ENTRY_WIDTH)
 text_ip_tl.grid(row=1, column=7, sticky=tkinter.W)
@@ -381,19 +386,22 @@ frame_ip2 = tkinter.Frame(root)
 frame_ip2.pack(fill=tkinter.X, padx=10)
 
 #識別番号
-label_ip_id = tkinter.Label(frame_ip2, text="識別番号 (0-65535):")
+label_text = "識別番号 (0-"+str(pkt.get_max_ip_id())+"):"
+label_ip_id = tkinter.Label(frame_ip2, text=label_text)
 label_ip_id.grid(row=0, column=0, sticky=tkinter.W, padx=(5,0))
 text_ip_id = tkinter.Entry(frame_ip2, width=ENTRY_WIDTH)
 text_ip_id.grid(row=0, column=1, sticky=tkinter.W)
 
 #フラグ
-label_ip_flags = tkinter.Label(frame_ip2, text="フラグ (0-7):")
+label_text = "フラグ (0-"+str(pkt.get_max_ip_flags())+"):"
+label_ip_flags = tkinter.Label(frame_ip2, text=label_text)
 label_ip_flags.grid(row=0, column=2, sticky=tkinter.W, padx=(5,0))
 text_ip_flags = tkinter.Entry(frame_ip2, width=ENTRY_WIDTH)
 text_ip_flags.grid(row=0, column=3, sticky=tkinter.W)
 
 #フラグメントオフセット
-label_ip_foffset = tkinter.Label(frame_ip2, text="フラグメントオフセット (0-8191):")
+label_text = "フラグメントオフセット (0-"+str(pkt.get_max_ip_foffset())+"):"
+label_ip_foffset = tkinter.Label(frame_ip2, text=label_text)
 label_ip_foffset.grid(row=0, column=4, sticky=tkinter.W, padx=(5,0))
 text_ip_foffset = tkinter.Entry(frame_ip2, width=ENTRY_WIDTH)
 text_ip_foffset.grid(row=0, column=5, sticky=tkinter.W)
@@ -404,19 +412,22 @@ frame_ip3 = tkinter.Frame(root)
 frame_ip3.pack(fill=tkinter.X, padx=10)
 
 #TTL
-label_ip_ttl = tkinter.Label(frame_ip3, text="TTL (0-255):")
+label_text = "TTL (0-"+str(pkt.get_max_ip_ttl())+"):"
+label_ip_ttl = tkinter.Label(frame_ip3, text=label_text)
 label_ip_ttl.grid(row=0, column=0, sticky=tkinter.W, padx=(5,0))
 text_ip_ttl = tkinter.Entry(frame_ip3, width=ENTRY_WIDTH)
 text_ip_ttl.grid(row=0, column=1, sticky=tkinter.W)
 
 #プロトコル
-label_ip_protocol = tkinter.Label(frame_ip3, text="プロトコル (0-15):")
+label_text = "プロトコル (0-"+str(pkt.get_max_ip_protocol())+"):"
+label_ip_protocol = tkinter.Label(frame_ip3, text=label_text)
 label_ip_protocol.grid(row=0, column=2, sticky=tkinter.W, padx=(5,0))
 text_ip_protocol = tkinter.Entry(frame_ip3, width=ENTRY_WIDTH)
 text_ip_protocol.grid(row=0, column=3, sticky=tkinter.W)
 
 #ヘッダチェックサム
-label_ip_chksum = tkinter.Label(frame_ip3, text="ヘッダチェックサム (0-65535):")
+label_text = "ヘッダチェックサム (0-"+str(pkt.get_max_ip_chksum())+"):"
+label_ip_chksum = tkinter.Label(frame_ip3, text=label_text)
 label_ip_chksum.grid(row=0, column=4, sticky=tkinter.W, padx=(5,0))
 text_ip_chksum = tkinter.Entry(frame_ip3, width=ENTRY_WIDTH)
 text_ip_chksum.grid(row=0, column=5, sticky=tkinter.W)
@@ -469,14 +480,16 @@ label_udp_title  = tkinter.Label(frame_udp1, text=title_text, font=('System', '1
 label_udp_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #送信元ポート番号
-label_udp_sport = tkinter.Label(frame_udp1, text="送信元ポート番号 (0-65535):")
+label_text = "送信元ポート番号 (0-"+str(pkt.get_max_udp_port())+"):"
+label_udp_sport = tkinter.Label(frame_udp1, text=label_text)
 label_udp_sport.grid(row=1, column=0, sticky=tkinter.W, padx=(5,0))
 text_udp_sport = tkinter.Entry(frame_udp1, width=ENTRY_WIDTH)
 text_udp_sport.insert(tkinter.END, "12345")
 text_udp_sport.grid(row=1, column=1, sticky=tkinter.W)
 
 #送信先ポート番号
-label_udp_dport = tkinter.Label(frame_udp1, text="送信先ポート番号 (0-65535):")
+label_text = "送信先ポート番号 (0-"+str(pkt.get_max_udp_port())+"):"
+label_udp_dport = tkinter.Label(frame_udp1, text=label_text)
 label_udp_dport.grid(row=1, column=2, sticky=tkinter.W, padx=(5,0))
 text_udp_dport = tkinter.Entry(frame_udp1, width=ENTRY_WIDTH, state=tkinter.DISABLED)
 text_udp_dport.grid(row=1, column=3, sticky=tkinter.W)
@@ -486,13 +499,15 @@ frame_udp2 = tkinter.Frame(root)
 frame_udp2.pack(fill=tkinter.X, padx=10)
 
 #データ長
-label_udp_dtl = tkinter.Label(frame_udp2, text="データ長 (0-65535):")
+label_text = "データ長 (0-"+str(pkt.get_max_udp_dtl())+"):"
+label_udp_dtl = tkinter.Label(frame_udp2, text=label_text)
 label_udp_dtl.grid(row=0, column=0, sticky=tkinter.W, padx=(5,0))
 text_udp_dtl = tkinter.Entry(frame_udp2, width=ENTRY_WIDTH)
 text_udp_dtl.grid(row=0, column=1, sticky=tkinter.W)
 
 #チェックサム
-label_udp_chksum = tkinter.Label(frame_udp2, text="チェックサム (0-65535):")
+label_text = "チェックサム (0-"+str(pkt.get_max_udp_chksum())+"):"
+label_udp_chksum = tkinter.Label(frame_udp2, text=label_text)
 label_udp_chksum.grid(row=0, column=2, sticky=tkinter.W, padx=(5,0))
 text_udp_chksum = tkinter.Entry(frame_udp2, width=ENTRY_WIDTH)
 text_udp_chksum.grid(row=0, column=3, sticky=tkinter.W)
