@@ -50,10 +50,10 @@ def send_packet_auto():
     send_packet_main()
 
     #-------------------------------------------------------
-    #IPヘッダ
+    #IPヘッダのパラメータ検査
     #-------------------------------------------------------
     #結果出力TEXTに表示
-    result_window_ctrl("set", "IPヘッダを変更してテストパケットを送信...")
+    result_window_ctrl("set", "IPヘッダのパラメータ検査...")
     count = 0
     err_flag = False
 
@@ -94,6 +94,44 @@ def send_packet_auto():
         else:
             result_window_ctrl("set", "異常: 応答なし")
             return "NG"
+
+    #-------------------------------------------------------
+    #UDPヘッダのパラメータ検査
+    #-------------------------------------------------------
+    #結果出力TEXTに表示
+    result_window_ctrl("set", "UDPヘッダのパラメータ検査...")
+    count = 0
+    err_flag = False
+
+    for key in pkt.max_udp_tbl:
+        #パラメータ全クリア
+        pkt.param_all_clr()
+        #最大値取得
+        max = pkt.max_udp_tbl[key]
+        #print(key+" max:"+str(max))
+
+        func = "pkt.set_"+key   #関数名作成
+
+        #ランダムで抜き取り検査
+        if key != "udp_port":
+            count += 1
+            random_list = random_ints_nodup(0, max, MAX_PKT_RANDOM)
+            for val in random_list:
+                eval(func)(str(val))    #関数名で定義した関数を実行
+
+                #テストパケット送信&ping確認
+                ret = pkt.send_packet()
+                if ret == "NG":
+                    err_flag = True
+                    break
+
+            if err_flag == False:
+                #結果出力TEXTに表示
+                resutl_text = " "+ str(count) + "/"+ str(len(pkt.max_udp_tbl)-1) + "回 完了"
+                result_window_ctrl("set", resutl_text)
+            else:
+                result_window_ctrl("set", "異常: 応答なし")
+                return "NG"
 
     #結果出力TEXTに表示
     result_window_ctrl("set", "成功")
