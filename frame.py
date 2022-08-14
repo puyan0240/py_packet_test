@@ -2,7 +2,7 @@ from cgitb import text
 import tkinter
 from tkinter import ttk
 from tkinter import messagebox
-import packetClass
+from packetClass import *
 import time
 from common import *
 
@@ -13,7 +13,7 @@ MAX_PKT_RANDOM =10
 start_flag = False
 
 #packetClassクラスのインスタンス
-pkt = packetClass.packetClass()
+pkt = packetClass()
 
 
 
@@ -186,13 +186,17 @@ def send_packet_auto():
     return "OK"
 
 
+############################################################
 #ラジオボタン押下
+############################################################
 def radio_top_click():
     #print("ラジオボタン押下:"+str(radio_top_text[radio_top_grp.get()]))
     manual_entry_ctrl() #手動Frame入力規制/解除
 
 
+############################################################
 #開始/停止ボタン押下
+############################################################
 def btn_top_click():
     global start_flag
 
@@ -265,11 +269,14 @@ def btn_top_click():
     manual_entry_ctrl() #手動Frame入力規制/解除
 
 
+############################################################
 #エントリー内容を反映させる関数(※戻り値はエラー文字列)
+############################################################
 def entry_data_input():
-    ###########################################################
+
+    #-------------------------------------------------------
     #Frame (TOP)
-    ###########################################################
+    #-------------------------------------------------------
     #送信先IPアドレス
     retval = pkt.set_ip_dstip(text_top_dstip.get())
     if retval == pkt.ERROR_NO_VALUE:
@@ -285,9 +292,9 @@ def entry_data_input():
         return "送信先ポート番号の範囲が不正です(0-"+str(pkt.get_max_udp_port())+")"
 
     if radio_top_text[radio_top_grp.get()] == "manual":
-        ###########################################################
+        #---------------------------------------------------
         #Frame (IP)
-        ###########################################################
+        #---------------------------------------------------
         #Version
         if pkt.set_ip_ver(text_ip_ver.get()) == pkt.ERROR_RANGE:
             return "versionの範囲が不正です(0-"+str(pkt.get_max_ip_ver())+")"
@@ -328,9 +335,9 @@ def entry_data_input():
         if pkt.set_ip_pad(text_ip_pad.get()) == pkt.ERROR_RANGE:
             return "パディングの範囲が不正です(0-)"
 
-        ###########################################################
+        #---------------------------------------------------
         #Frame (UDP)
-        ###########################################################
+        #---------------------------------------------------
         #送信元ポート番号
         if pkt.set_udp_sport(text_udp_sport.get()) == pkt.ERROR_RANGE:
             return "送信元ポート番号の範囲が不正です(0-"+str(pkt.get_max_udp_port())+")"
@@ -341,11 +348,10 @@ def entry_data_input():
         if pkt.set_udp_chksum(text_udp_chksum.get()) == pkt.ERROR_RANGE:
             return "チェックサムの範囲が不正です(0-"+str(pkt.get_max_udp_chksum())+")"
 
-        ###########################################################
+        #---------------------------------------------------
         #Frame (User DATA)
-        ###########################################################
+        #---------------------------------------------------
         pkt.set_data(text_data_data.get())
-
 
     return "OK"
 
@@ -426,9 +432,9 @@ root.title("Packet Test")
 root.geometry("600x700")
 
 
-###########################################################
+#-----------------------------------------------------------
 #Frame (TOP)
-###########################################################
+#-----------------------------------------------------------
 frame_top_base = tkinter.Frame(root)
 frame_top_base.pack(fill=tkinter.X, pady=(0,20))
 
@@ -480,9 +486,9 @@ btn_top.pack(padx=(10,10))
 border = ttk.Separator(root, orient="horizontal")
 border.pack(fill=tkinter.X)
 
-###########################################################
+#-----------------------------------------------------------
 #Frame (IP)
-###########################################################
+#-----------------------------------------------------------
 #IP 1行目--------------------
 frame_ip1 = tkinter.Frame(root)
 frame_ip1.pack(fill=tkinter.X, padx=10)
@@ -608,9 +614,9 @@ text_ip_pad = tkinter.Entry(frame_ip5, width=ENTRY_WIDTH_IPADDR)
 text_ip_pad.grid(row=0, column=3, sticky=tkinter.W)
 
 
-###########################################################
+#-----------------------------------------------------------
 #Frame (UDP)
-###########################################################
+#-----------------------------------------------------------
 #UDP: 1行目--------------------
 frame_udp1 = tkinter.Frame(root)
 frame_udp1.pack(fill=tkinter.X, padx=10)
@@ -654,9 +660,9 @@ text_udp_chksum = tkinter.Entry(frame_udp2, width=ENTRY_WIDTH)
 text_udp_chksum.grid(row=0, column=3, sticky=tkinter.W)
 
 
-###########################################################
+#-----------------------------------------------------------
 #Frame (DATA)
-###########################################################
+#-----------------------------------------------------------
 frame_data = tkinter.Frame(root)
 frame_data.pack(fill=tkinter.X, padx=10)
 
@@ -673,11 +679,9 @@ text_data_data.insert(tkinter.END, "TEST")
 text_data_data.grid(row=1, column=1, sticky=tkinter.W)
 
 
-
-
-###########################################################
+#-----------------------------------------------------------
 #Frame (RESULT)
-###########################################################
+#-----------------------------------------------------------
 frame_result = tkinter.Frame(root)
 frame_result.pack(fill=tkinter.X, pady=(60,10))
 
