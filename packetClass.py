@@ -61,6 +61,9 @@ class packetClass():
         self.ip_ver = ip_ver
         return self.OK
     
+    def get_max_ip_ver(self):
+        return self.MAX_IP_VER
+
     def set_ip_ihl(self, ip_ihl):
         if ip_ihl != "":
             try:
@@ -71,7 +74,10 @@ class packetClass():
                 return self.ERROR_RANGE
         self.ip_ihl = ip_ihl
         return self.OK
-    
+
+    def get_max_ip_ihl(self):
+        return self.MAX_IP_IHL
+
     def set_ip_tos(self, ip_tos):
         if ip_tos != "":
             try:
@@ -82,7 +88,10 @@ class packetClass():
                 return self.ERROR_RANGE
         self.ip_tos = ip_tos
         return self.OK
-    
+
+    def get_max_ip_tos(self):
+        return self.MAX_IP_TOS
+
     def set_ip_tl(self, ip_tl):
         if ip_tl != "":
             try:
@@ -93,6 +102,9 @@ class packetClass():
                 return self.ERROR_RANGE
         self.ip_tl = ip_tl
         return self.OK
+
+    def get_max_ip_tl(self):
+        return self.MAX_IP_TL
     
     def set_ip_id(self, ip_id):
         if ip_id != "":
@@ -105,6 +117,9 @@ class packetClass():
         self.ip_id = ip_id
         return self.OK
     
+    def get_max_ip_id(self):
+        return self.MAX_IP_ID
+    
     def set_ip_flags(self, ip_flags):
         if ip_flags != "":
             try:
@@ -115,6 +130,9 @@ class packetClass():
                 return self.ERROR_RANGE
         self.ip_flags = ip_flags
         return self.OK
+    
+    def get_max_ip_flags(self):
+        return self.MAX_IP_FLAGS
     
     def set_ip_foffset(self, ip_foffset):
         if ip_foffset != "":
@@ -127,6 +145,9 @@ class packetClass():
         self.ip_foffset = ip_foffset
         return self.OK
     
+    def get_max_ip_foffset(self):
+        return self.MAX_IP_FOFFSET
+
     def set_ip_ttl(self, ip_ttl):
         if ip_ttl != "":
             try:
@@ -138,6 +159,9 @@ class packetClass():
         self.ip_ttl = ip_ttl
         return self.OK
     
+    def get_max_ip_ttl(self):
+        return self.MAX_IP_TTL
+
     def set_ip_protocol(self, ip_protocol):
         if ip_protocol != "":
             try:
@@ -149,6 +173,9 @@ class packetClass():
         self.ip_protocol = ip_protocol
         return self.OK
 
+    def get_max_ip_protocol(self):
+        return self.MAX_IP_PROTOCOL
+
     def set_ip_chksum(self, ip_chksum):
         if ip_chksum != "":
             try:
@@ -159,6 +186,9 @@ class packetClass():
                 return self.ERROR_RANGE
         self.ip_chksum = ip_chksum
         return self.OK
+
+    def get_max_ip_chksum(self):
+        return self.MAX_IP_CHKSUM
 
     def set_ip_srcip(self, ip_srcip):
         return self.OK
@@ -211,6 +241,9 @@ class packetClass():
         self.udp_sport = udp_sport
         return self.OK
 
+    def get_max_udp_port(self):
+        return self.MAX_UDP_PORT
+
     def set_udp_dport(self, dport):
         if dport == "":
             return self.ERROR_NO_VALUE
@@ -234,6 +267,9 @@ class packetClass():
                 return self.ERROR_RANGE
         self.udp_dtl = udp_dtl
         return self.OK
+    
+    def get_max_udp_dtl(self):
+        return self.MAX_UDP_DTL
 
     def set_udp_chksum(self, udp_chksum):
         if udp_chksum != "":
@@ -246,6 +282,9 @@ class packetClass():
         self.udp_chksum = udp_chksum
         return self.OK
     
+    def get_max_udp_chksum(self):
+        return self.MAX_UDP_CHKSUM
+
     def set_data(self, data):
         self.data = data
         return self.OK
