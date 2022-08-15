@@ -139,8 +139,8 @@ def send_packet_auto():
         if err_flag == False:
             result_window_ctrl("set", "  OK")
         else:
-            result_window_ctrl("set", "  異常: 応答なし!!!!!!!!!!!")
-            result_window_ctrl("set", "  "+param_name+":"+str(val))
+            result_window_ctrl("set", "  #################### エラー検出 ####################")
+            result_window_ctrl("set", "    "+param_name+":"+str(val))
             return "NG"
 
     #-------------------------------------------------------
@@ -192,8 +192,8 @@ def send_packet_auto():
             if err_flag == False:
                 result_window_ctrl("set", "  OK")
             else:
-                result_window_ctrl("set", "  異常: 応答なし!!!!!!!!!!!")
-                result_window_ctrl("set", "  "+param_name+":"+str(val))
+                result_window_ctrl("set", "  #################### エラー検出 ####################")
+                result_window_ctrl("set", "    "+param_name+":"+str(val))
                 return "NG"
 
     #結果出力TEXTに表示
