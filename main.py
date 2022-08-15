@@ -196,6 +196,28 @@ def send_packet_auto():
                 result_window_ctrl("set", "    "+param_name+":"+str(val))
                 return "NG"
 
+    #-------------------------------------------------------
+    #UDPヘッダのパラメータ検査
+    #-------------------------------------------------------
+    #結果出力TEXTに表示
+    result_window_ctrl("set", "User DATAを最小値でテストパケットを送信...")
+    #パラメータ全クリア
+    pkt.param_all_clr()
+    #最小のランダム文字列
+    pkt.set_user_data(random_str(0))
+    #テストパケット送信メイン関数
+    send_packet_main()
+
+    #結果出力TEXTに表示
+    result_window_ctrl("set", "User DATAを最大値でテストパケットを送信...")
+    #パラメータ全クリア
+    pkt.param_all_clr()
+    #最大のランダム文字列
+    pkt.set_user_data(random_str(pkt.get_max_user_data()))
+    #テストパケット送信メイン関数
+    send_packet_main()
+
+
     #結果出力TEXTに表示
     result_window_ctrl("set", "完了")
     return "OK"

@@ -478,7 +478,7 @@ class packetClass():
     #User DATA一括設定
     ########################################################
     #クリア
-    def param_user_data(self):
+    def param_user_data_clr(self):
         self.clr_user_data()
     
     #最大値設定
@@ -497,6 +497,10 @@ class packetClass():
     def param_all_clr(self):
         self.param_ip_clr()
         self.param_udp_clr()
+        self.param_user_data_clr()
+        #以降の検査で文字列が無くなってしまうのでランダム値で埋めておく
+        self.set_user_data(random_str(16))
+
 
     #最大値設定
     def param_all_set_max(self):
