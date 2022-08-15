@@ -366,7 +366,7 @@ def entry_data_input():
         #---------------------------------------------------
         #Frame (User DATA)
         #---------------------------------------------------
-        pkt.set_data(text_data_data.get())
+        pkt.set_user_data(text_user_data.get())
 
     return "OK"
 
@@ -396,8 +396,8 @@ def manual_entry_ctrl():
         text_udp_dport.config(state=tkinter.DISABLED)
         text_udp_dtl.config(state=tkinter.DISABLED)
         text_udp_chksum.config(state=tkinter.DISABLED)
-        #DATA
-        text_data_data.config(state=tkinter.DISABLED)
+        #User DATA
+        text_user_data.config(state=tkinter.DISABLED)
         return
     else:
         #IP
@@ -420,8 +420,8 @@ def manual_entry_ctrl():
         #text_udp_dport.config(state=tkinter.NORMAL)
         text_udp_dtl.config(state=tkinter.NORMAL)
         text_udp_chksum.config(state=tkinter.NORMAL)
-        #DATA
-        text_data_data.config(state=tkinter.NORMAL)
+        #User DATA
+        text_user_data.config(state=tkinter.NORMAL)
         return
 
 
@@ -676,22 +676,22 @@ text_udp_chksum.grid(row=0, column=3, sticky=tkinter.W)
 
 
 #-----------------------------------------------------------
-#Frame (DATA)
+#Frame (User DATA)
 #-----------------------------------------------------------
-frame_data = tkinter.Frame(root)
-frame_data.pack(fill=tkinter.X, padx=10)
+frame_user_data = tkinter.Frame(root)
+frame_user_data.pack(fill=tkinter.X, padx=10)
 
 #タイトル
 title_text = "\n==================== User DATA ===================="
-label_data_title  = tkinter.Label(frame_data, text=title_text, font=('System', '12', 'bold'))
-label_data_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
+label_user_data_title  = tkinter.Label(frame_user_data, text=title_text, font=('System', '12', 'bold'))
+label_user_data_title.grid(row=0, column=0, columnspan=8, sticky=tkinter.W)
 
 #データ
-label_data_data = tkinter.Label(frame_data, text="データ")
-label_data_data.grid(row=1, column=0, sticky=tkinter.W, padx=(5,0))
-text_data_data = tkinter.Entry(frame_data, width=80)
-text_data_data.insert(tkinter.END, "TEST")
-text_data_data.grid(row=1, column=1, sticky=tkinter.W)
+label_user_data = tkinter.Label(frame_user_data, text="データ")
+label_user_data.grid(row=1, column=0, sticky=tkinter.W, padx=(5,0))
+text_user_data = tkinter.Entry(frame_user_data, width=80)
+text_user_data.insert(tkinter.END, "TEST")
+text_user_data.grid(row=1, column=1, sticky=tkinter.W)
 
 
 #-----------------------------------------------------------

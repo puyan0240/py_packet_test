@@ -2,6 +2,7 @@ from scapy.all import *
 from ping3 import ping
 import socket
 import time
+from common import *
 
 class packetClass():
     OK=0
@@ -27,6 +28,9 @@ class packetClass():
         "udp_dtl":65535,
         "udp_chksum":65535
     }
+    max_user_data_tbl = {
+        "user_data":1500
+    }
 
 
     def __init__(self):
@@ -50,8 +54,8 @@ class packetClass():
         self.udp_dport = ""
         self.udp_dtl = ""
         self.udp_chksum = ""
-        #DATA
-        self.data = ""
+        #User DATA
+        self.user_data = ""
   
 
     #-------------------------------------------------------
@@ -392,12 +396,19 @@ class packetClass():
     def get_max_udp_chksum(self):
         return self.max_udp_tbl["udp_chksum"]
 
-
+    #-------------------------------------------------------
     #User DATA
-    def set_data(self, data):
-        self.data = data
+    #-------------------------------------------------------
+    def set_user_data(self, user_data):
+        self.user_data = user_data
         return self.OK
+    
+    def clr_user_data(self):
+        self.user_data = ""
 
+    def get_max_user_data(self):
+        return self.max_user_data_tbl["user_data"]
+   
 
     ########################################################
     #IPパラメータクリア(IPアドレス以外)一括設定
@@ -462,6 +473,22 @@ class packetClass():
         self.set_udp_dtl(self.get_max_udp_dtl())
         self.set_udp_chksum(self.get_max_udp_chksum())
 
+    
+    ########################################################
+    #User DATA一括設定
+    ########################################################
+    #クリア
+    def param_user_data(self):
+        self.clr_user_data()
+    
+    #最大値設定
+    def param_user_data_set_max(self):
+        self.set_user_data(random_str(self.get_max_user_data()))
+
+    #最小値設定
+    def param_user_data_set_min(self):
+        self.set_user_data(random_str(0))
+
 
     ########################################################
     #一括設定
@@ -476,12 +503,14 @@ class packetClass():
         self.param_all_clr()    #全クリア
         self.param_ip_set_max()
         self.param_udp_set_max()
+        self.param_user_data_set_max()
 
     #最小値設定
     def param_all_set_min(self):
         self.param_all_clr()    #全クリア
         self.param_ip_set_min()
         self.param_udp_set_min()
+        self.param_user_data_set_min()
 
 
 
@@ -562,8 +591,8 @@ class packetClass():
         #カスタムパラメータ(User DATA)
         #----------------------------------------------------
         #User DATA
-        if self.data != "":
-            pkt_raw.load = self.data.encode()
+        if self.user_data != "":
+            pkt_raw.load = self.user_data.encode()
 
 
         #パケット組み立て
