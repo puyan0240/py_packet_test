@@ -29,7 +29,7 @@ class packetClass():
         "udp_chksum":65535
     }
     max_user_data_tbl = {
-        "user_data":1500
+        "user_data":1400 #仮
     }
 
 
