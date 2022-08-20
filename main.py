@@ -1,10 +1,7 @@
-from cgitb import text
 import tkinter
 from tkinter import ttk
 from tkinter import messagebox
 from packetClass import *
-import time
-from common import *
 
 ENTRY_WIDTH=6
 ENTRY_WIDTH_IPADDR =16
