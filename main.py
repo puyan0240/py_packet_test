@@ -435,8 +435,8 @@ def manual_entry_ctrl():
         text_ip_chksum.config(state=tkinter.NORMAL)
         text_ip_srcip.config(state=tkinter.NORMAL)
         #text_ip_dstip.config(state=tkinter.NORMAL)
-        text_ip_opt.config(state=tkinter.NORMAL)
-        text_ip_pad.config(state=tkinter.NORMAL)
+        #text_ip_opt.config(state=tkinter.NORMAL)
+        #text_ip_pad.config(state=tkinter.NORMAL)
         #UDP
         text_udp_sport.config(state=tkinter.NORMAL)
         #text_udp_dport.config(state=tkinter.NORMAL)
@@ -642,12 +642,14 @@ frame_ip5.pack(fill=tkinter.X, padx=10)
 label_ip_opt = tkinter.Label(frame_ip5, text="オプション:")
 label_ip_opt.grid(row=0, column=0, sticky=tkinter.W, padx=(5,0))
 text_ip_opt = tkinter.Entry(frame_ip5, width=ENTRY_WIDTH_IPADDR)
+text_ip_opt.config(state=tkinter.DISABLED)
 text_ip_opt.grid(row=0, column=1, sticky=tkinter.W)
 
 #パディング
 label_ip_pad = tkinter.Label(frame_ip5, text="パディング:(0-)")
 label_ip_pad.grid(row=0, column=2, sticky=tkinter.W, padx=(5,0))
 text_ip_pad = tkinter.Entry(frame_ip5, width=ENTRY_WIDTH_IPADDR)
+text_ip_pad.config(state=tkinter.DISABLED)
 text_ip_pad.grid(row=0, column=3, sticky=tkinter.W)
 
 
