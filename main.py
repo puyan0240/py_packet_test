@@ -462,7 +462,7 @@ def result_window_ctrl(cmd, msg):
 
 
 root = tkinter.Tk()
-root.title("packet_test")
+root.title("IPパケット検査")
 root.geometry("600x700")
 
 
